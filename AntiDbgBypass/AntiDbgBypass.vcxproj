@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +141,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AntiDbg.cpp" />
     <ClCompile Include="AntiDbgBypass.cpp" />
+    <ClCompile Include="PEHeadersHelper.cpp" />
+    <ClCompile Include="ProcessManagement32.cpp" />
+    <ClCompile Include="ProcessManagement64.cpp" />
+    <ClCompile Include="ProcessManagementUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AntiDbg.h" />
+    <ClInclude Include="PEHeadersHelper.h" />
+    <ClInclude Include="ProcessManagement.h" />
+    <ClInclude Include="ProcessManagement32.h" />
+    <ClInclude Include="ProcessManagement64.h" />
+    <ClInclude Include="ProcessManagementUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

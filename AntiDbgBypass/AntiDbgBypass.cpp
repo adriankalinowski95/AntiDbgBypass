@@ -2,10 +2,18 @@
 //
 
 #include <iostream>
+#include "ProcessManagement32.h"
+#include "ProcessManagementUtils.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    ProcessManagement32 processManagment("Riot Client");
+    auto processHandle = ProcessManagementUtils::getProcessHandleByName("Zezenia.exe");
+    auto baseAddress = ProcessManagementUtils::getProcessBaseAddress(*processHandle);
+
+    std::cout << std::hex << *baseAddress;
+
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
