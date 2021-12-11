@@ -73,7 +73,7 @@ std::optional<IMAGE_NT_HEADERS> ProcessManagement32::getNtHeader() {
 
 	std::uint8_t headersBuf[Page_Size];
 	std::uint32_t readBytes;
-	if(!ReadProcessMemory(*processHandle, (LPCVOID)*baseAddress, headersBuf, sizeof(headersBuf), (SIZE_T)&readBytes) || readBytes != sizeof(headersBuf)) {
+	if(!ReadProcessMemory(*processHandle, (LPCVOID)*baseAddress, headersBuf, sizeof(headersBuf), (SIZE_T*)&readBytes) || readBytes != sizeof(headersBuf)) {
 		return std::nullopt;
 	}
 
