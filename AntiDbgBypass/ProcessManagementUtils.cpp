@@ -1,6 +1,11 @@
 #include "ProcessManagementUtils.h"
 #include <tlhelp32.h>
 #include "psapi.h"
+#include <libloaderapi.h>
+#include "ntddk.h"
+
+typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS) ( HANDLE, PBOOL );
+LPFN_ISWOW64PROCESS fnIsWow64Process;
 
 std::optional<std::uint32_t> ProcessManagementUtils::getProcessIDByName(std::string processName) {
 	auto snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -81,18 +86,16 @@ std::optional<std::uint64_t> ProcessManagementUtils::getProcessBaseAddress(HANDL
 	if(EnumProcessModules(processHandle, moduleArray, bytesRequired, (LPDWORD)(&bytesRequired))) {
 		baseAddress = (std::uint64_t)moduleArray[0];
 		LocalFree(moduleArrayBytes);
-		CloseHandle(processHandle);
+		// CloseHandle(processHandle);
 
 		return baseAddress;
 	}
 
 	LocalFree(moduleArrayBytes);
-	CloseHandle(processHandle);
+	// CloseHandle(processHandle);
 	
 	return std::nullopt;
 }
-
-
 
 std::optional<IMAGE_NT_HEADERS> ProcessManagementUtils::getNtHeaders32(BYTE* peBuffer) {
 	if(!peBuffer) {
@@ -142,4 +145,41 @@ std::optional<IMAGE_DATA_DIRECTORY> ProcessManagementUtils::getPEDirectory32(PVO
 
 IMAGE_OPTIONAL_HEADER ProcessManagementUtils::getOptionalHeader(IMAGE_NT_HEADERS& imageNtHeader) {
 	return imageNtHeader.OptionalHeader;
+}
+
+
+std::optional<PEB> ProcessManagementUtils::getPEB(HANDLE processHandle) {
+	BOOL isWow64 = FALSE;
+	if(!IsWow64Process(processHandle, &isWow64)) {
+		std::nullopt;
+	}
+
+	/* If process isn't wow64 it could be x64 or x86 without wow. */
+	if(!isWow64) {
+		return std::nullopt;
+	}
+
+	//PROCESS_BASIC_INFORMATION_WOW64 pbi;
+	//ZeroMemory(&pbi, sizeof(pbi));
+	//_NtQueryInformationProcess query = (_NtQueryInformationProcess)GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtWow64QueryInformationProcess64");
+	//auto err = query(processHandle, 0, &pbi, sizeof(pbi), NULL);
+	PROCESS_BASIC_INFORMATION pbi;
+	if (NtQueryInformationProcess(processHandle, ProcessBasicInformation, &pbi, sizeof(PROCESS_BASIC_INFORMATION), NULL) != 0) {
+		return std::nullopt;
+	}
+	
+	
+	auto processBaseAddress =  ProcessManagementUtils::getProcessBaseAddress(processHandle);
+	SIZE_T read_bytes = 0;
+	if(!ReadProcessMemory(processHandle, (BYTE*)(pbi.PebBaseAddress) + 8, &(*processBaseAddress), sizeof(*processBaseAddress), &read_bytes) || read_bytes != sizeof(*processBaseAddress)) {
+		return std::nullopt;
+	}
+
+	PEB peb{};
+	if(!ReadProcessMemory(processHandle, (LPCVOID)pbi.PebBaseAddress, &peb, sizeof(peb), &read_bytes) || read_bytes != sizeof(peb)) {
+		return std::nullopt;
+	}
+	
+
+	return peb;
 }

@@ -1,5 +1,358 @@
-﻿  ProcessManagment.cpp
-  The contents of <string_view> are available only with C++17 or later.
-C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagment.h(7,24): error C2039: 'string_view': is not a member of 'std'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\cstdint(21): message : see declaration of 'std'
-C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagment.h(7,18): error C2061: syntax error: identifier 'string_view'
+﻿  AntiDbg.cpp
+  AntiDbgBypass.cpp
+  The contents of <optional> are available only with C++17 or later.
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(17): message : see reference to class template instantiation 'ProcessManagement<T>' being compiled
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,81): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,78): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,81): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,71): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,101): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,56): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2433: 'ProcessManagement<uint32_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2433: 'ProcessManagement<uint32_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2433: 'ProcessManagement<uint32_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,88): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,115): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,116): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,54): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,47): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass.cpp(11,50): error C2039: 'getProcessHandleByName': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass.cpp(11,72): error C3861: 'getProcessHandleByName': identifier not found
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass.cpp(13,40): error C2039: 'getPEB': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass.cpp(13,46): error C3861: 'getPEB': identifier not found
+  ProcessManagement32.cpp
+  The contents of <optional> are available only with C++17 or later.
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(17): message : see reference to class template instantiation 'ProcessManagement<T>' being compiled
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,81): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,78): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,81): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,71): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,101): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,56): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2433: 'ProcessManagement<uint32_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2433: 'ProcessManagement<uint32_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2433: 'ProcessManagement<uint32_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(9,88): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(10,115): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(11,116): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(12,54): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,7): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,15): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(13,47): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8,50): error C2039: 'getModuleInformation': is not a member of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(6): message : see declaration of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8,100): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8,100): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,50): error C2039: 'readMemory': is not a member of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(6): message : see declaration of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,127): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(20,127): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,50): error C2039: 'writeMemory': is not a member of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(6): message : see declaration of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,128): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(38,128): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,51): error C2039: 'getProcessBaseAddress': is not a member of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(6): message : see declaration of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,75): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(54,75): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(8): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,54): error C2039: 'getNtHeader': is not a member of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.h(6): message : see declaration of 'ProcessManagement32'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,68): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement32.cpp(63,68): error C2447: '{': missing function header (old-style formal list?)
+  ProcessManagement64.cpp
+  The contents of <optional> are available only with C++17 or later.
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(17): message : see reference to class template instantiation 'ProcessManagement<T>' being compiled
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,15): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2433: 'ProcessManagement<T>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(14,1): error C2433: 'ProcessManagement<uint64_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(15,1): error C2433: 'ProcessManagement<uint64_t>::optional': 'virtual' not permitted on data declarations
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagement.h(16,1): error C2433: 'ProcessManagement<uint64_t>::optional': 'virtual' not permitted on data declarations
+  ProcessManagementUtils.cpp
+  The contents of <optional> are available only with C++17 or later.
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33,81): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(34,78): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(35,81): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(36,71): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,23): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(37,101): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,14): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,22): error C2086: 'int ProcessManagementUtils::optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(33): message : see declaration of 'ProcessManagementUtils::optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(39,56): error C2238: unexpected token(s) preceding ';'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10,54): error C2039: 'getProcessIDByName': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10,98): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10,98): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,47): error C2039: 'getProcessHandleByName': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,95): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(45,95): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,54): error C2039: 'getProcessBaseAddress': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,98): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(59,98): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,57): error C2039: 'getNtHeaders32': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,88): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(100,88): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,61): error C2039: 'getPEDirectory32': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,117): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(123,117): error C2447: '{': missing function header (old-style formal list?)
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,6): error C2039: 'optional': is not a member of 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\string(24): message : see declaration of 'std'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,14): error C2143: syntax error: missing ';' before '<'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,14): error C2086: 'int optional': redefinition
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(10): message : see declaration of 'optional'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,44): error C2039: 'getPEB': is not a member of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.h(31): message : see declaration of 'ProcessManagementUtils'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,73): error C2143: syntax error: missing ';' before '{'
+C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\ProcessManagementUtils.cpp(153,73): error C2447: '{': missing function header (old-style formal list?)
+  Generating Code...

@@ -7,11 +7,12 @@
 
 int main()
 {
-    ProcessManagement32 processManagment("Riot Client");
-    auto processHandle = ProcessManagementUtils::getProcessHandleByName("Zezenia.exe");
+    // ProcessManagement32 processManagment("Calculator.exe");
+    auto processHandle = ProcessManagementUtils::getProcessHandleByName("FPSRunner32.exe");
     auto baseAddress = ProcessManagementUtils::getProcessBaseAddress(*processHandle);
-
-    std::cout << std::hex << *baseAddress;
+    auto peb = ProcessManagementUtils::getPEB(*processHandle);
+   // auto peb = processManagment.getPEB();
+   // std::cout << std::hex << *baseAddress;
 
     return 0;
 }

@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
+    <ClInclude Include="ntddk.h" />
     <ClInclude Include="ProcessManagement.h" />
     <ClInclude Include="ProcessManagement32.h" />
     <ClInclude Include="ProcessManagement64.h" />
