@@ -1,0 +1,5 @@
+/.vs/*
+/x64/*
+/AntiDbgBypass/x64/*
+/AntiDbgBypass/Debug/*
+/Debug/*
