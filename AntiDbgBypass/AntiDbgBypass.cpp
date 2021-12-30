@@ -6,11 +6,18 @@
 #include "ProcessManagement32.h"
 #include "ProcessManagementUtils.h"
 
+#include "AntiDbg.h"
+
+constexpr static const char Process_Name[] = "al-khaser.exe";
+
 int main()
 {
-    ProcessManagementUM pmum("MSBuild.exe");
-    ProcessManagement32 pm32(pmum);
-    auto peb = pm32.getPEB();
+    AntiDbg antiDbg(Process_Name);
+    if(!antiDbg.bypassAll()) {
+        std::cout << "Bypass error! " << std::endl;
+    }
+
+    std::cout << "Bypass success! " << std::endl;
 
     return 0;
 }

@@ -6,7 +6,11 @@ class AntiDbg {
 public:
 	AntiDbg(std::string processName);
 	bool isNtGlobalFlag32On();
-	bool bypassNtGlobalFlagCheck();
+	bool bypassNtGlobalFlag32();
+	bool isNtGlobalFlagWow64On();
+	bool bypassNtGlobalFlagWow64();
+	bool bypassAll();
+
 private:
 	ProcessManagementUM m_rocessManagementUM;
 	ProcessManagement32 m_processManagement32;

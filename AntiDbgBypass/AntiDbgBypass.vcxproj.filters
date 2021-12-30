@@ -33,6 +33,9 @@
     <ClCompile Include="ProcessManagementUM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vmm32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -54,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ProcessManagementUM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="peb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vmm32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

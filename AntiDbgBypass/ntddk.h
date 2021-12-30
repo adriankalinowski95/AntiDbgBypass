@@ -2746,7 +2746,6 @@ extern "C" {
 
     } PEB, * PPEB;
 
-
     //
     // Thread environment block
     //
@@ -2774,7 +2773,6 @@ extern "C" {
         KPRIORITY BasePriority;
         ULONG_PTR UniqueProcessId;
         ULONG_PTR InheritedFromUniqueProcessId;
-
     } PROCESS_BASIC_INFORMATION, * PPROCESS_BASIC_INFORMATION;
 
 
