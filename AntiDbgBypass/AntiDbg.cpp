@@ -6,8 +6,8 @@ AntiDbg::AntiDbg(std::string processName):
 	m_processManagement32{ m_rocessManagementUM } {
 	}
 
-bool AntiDbg::isNtGlobalFlag32On() {
-	auto peb = m_processManagement32.getPEB();
+bool AntiDbg::isNtGlobalFlag32() {
+	auto peb = m_processManagement32.getPEB32();
 	if(!peb) {
 		return false;
 	}
@@ -17,7 +17,7 @@ bool AntiDbg::isNtGlobalFlag32On() {
 
 bool AntiDbg::bypassNtGlobalFlag32() {
 	auto pbi = m_processManagement32.getPBI();
-	auto peb = m_processManagement32.getPEB();
+	auto peb = m_processManagement32.getPEB32();
 	if(!peb || !pbi) {
 		return false;
 	}
@@ -25,13 +25,13 @@ bool AntiDbg::bypassNtGlobalFlag32() {
 	auto currFlag = peb->NtGlobalFlag;
 	currFlag &= ~NT_GLOBAL_FLAG_DEBUGGED;
 
-	auto flagAddress = (std::uint32_t)pbi->PebBaseAddress + offsetof(PEB32, NtGlobalFlag);
+	auto flagAddress = (std::uint32_t)m_processManagement32.getPEB32FromPBI(*pbi) + offsetof(PEB32, NtGlobalFlag);
 
 	return m_processManagement32.getVmm().putVar(currFlag, flagAddress);
 }
 
-bool AntiDbg::isNtGlobalFlagWow64On() {
-	auto peb = m_processManagement32.getPEBWow64();
+bool AntiDbg::isNtGlobalFlag64() {
+	auto peb = m_processManagement32.getPEB64();
 	if(!peb) {
 		return false;
 	}
@@ -39,9 +39,9 @@ bool AntiDbg::isNtGlobalFlagWow64On() {
 	return peb->NtGlobalFlag & NT_GLOBAL_FLAG_DEBUGGED;
 }
 
-bool AntiDbg::bypassNtGlobalFlagWow64() {
-	auto pbi = m_processManagement32.getPBIWow64();
-	auto peb = m_processManagement32.getPEBWow64();
+bool AntiDbg::bypassNtGlobalFlag64() {
+	auto pbi = m_processManagement32.getPBI();
+	auto peb = m_processManagement32.getPEB64();
 	if(!peb || !pbi) {
 		return false;
 	}
@@ -49,19 +49,19 @@ bool AntiDbg::bypassNtGlobalFlagWow64() {
 	auto currFlag = peb->NtGlobalFlag;
 	currFlag &= ~NT_GLOBAL_FLAG_DEBUGGED;
 
-	auto flagAddress = ( std::uint32_t )pbi->PebBaseAddress + offsetof(PEB32, NtGlobalFlag);
+	auto flagAddress = ( std::uint32_t )pbi->PebBaseAddress + offsetof(PEB64, NtGlobalFlag);
 
 	return m_processManagement32.getVmm().putVar(currFlag, flagAddress);
 }
 
 bool AntiDbg::bypassAll() {
-	if(isNtGlobalFlag32On()) {
+	if(isNtGlobalFlag32()) {
 		if(!bypassNtGlobalFlag32()) {
 			return false;
 		}
 	}
-	if(isNtGlobalFlagWow64On()) {
-		if(!bypassNtGlobalFlagWow64()) {
+	if(isNtGlobalFlag64()) {
+		if(!bypassNtGlobalFlag64()) {
 			return false;
 		}
 	}

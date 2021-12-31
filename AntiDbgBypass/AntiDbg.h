@@ -5,10 +5,10 @@
 class AntiDbg {
 public:
 	AntiDbg(std::string processName);
-	bool isNtGlobalFlag32On();
+	bool isNtGlobalFlag32();
+	bool isNtGlobalFlag64();
 	bool bypassNtGlobalFlag32();
-	bool isNtGlobalFlagWow64On();
-	bool bypassNtGlobalFlagWow64();
+	bool bypassNtGlobalFlag64();
 	bool bypassAll();
 
 private:

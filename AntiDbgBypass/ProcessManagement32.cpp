@@ -10,6 +10,10 @@ ProcessManagement32::~ProcessManagement32() {
 
 }
 
+Vmm32& ProcessManagement32::getVmm() {
+	return m_vmm;
+}
+
 std::optional<IMAGE_NT_HEADERS32> ProcessManagement32::getNtHeader() {
 	if (!m_processManagement.getProcessHandle()) {
 		return std::nullopt;
@@ -48,30 +52,15 @@ std::optional<PROCESS_BASIC_INFORMATION> ProcessManagement32::getPBI() {
 		return std::nullopt;
 	}
 
-	pbi.PebBaseAddress = (PPEB)( (ULONG_PTR)pbi.PebBaseAddress + Page_Size );
 
 	return pbi;
 }
 
-std::optional<PROCESS_BASIC_INFORMATION> ProcessManagement32::getPBIWow64() {
-	BOOL isWow64 = FALSE;
-	if(!IsWow64Process(m_processManagement.getProcessHandle().value(), &isWow64)) {
-		std::nullopt;
-	}
-
-	if(!isWow64) {
-		return std::nullopt;
-	}
-
-	PROCESS_BASIC_INFORMATION pbi{};
-	if (NtQueryInformationProcess(m_processManagement.getProcessHandle().value(), ProcessBasicInformation, &pbi, sizeof(PROCESS_BASIC_INFORMATION_WOW64), NULL) != 0) {
-		return std::nullopt;
-	}
-
-	return PROCESS_BASIC_INFORMATION{};
+std::uint32_t ProcessManagement32::getPEB32FromPBI(PROCESS_BASIC_INFORMATION& pbi) {
+	return reinterpret_cast<std::uint32_t>(pbi.PebBaseAddress) + Page_Size;
 }
 
-std::optional<PEB32> ProcessManagement32::getPEB() {
+std::optional<PEB32> ProcessManagement32::getPEB32() {
 	if(!m_processManagement.getProcessHandle()) {
 		return std::nullopt;
 	}
@@ -82,8 +71,7 @@ std::optional<PEB32> ProcessManagement32::getPEB() {
 	}
 
 	PEB32 peb{};
-	const auto readedMemory = m_processManagement.readMemory(reinterpret_cast<std::uint32_t>( pbi->PebBaseAddress ),
-															 reinterpret_cast<std::uint8_t*>(&peb), sizeof(peb));
+	const auto readedMemory = m_processManagement.readMemory(getPEB32FromPBI(*pbi), reinterpret_cast<std::uint8_t*>(&peb), sizeof(peb));
 	if(!readedMemory || readedMemory != sizeof(peb)) {
 		return std::nullopt;
 	}
@@ -91,17 +79,17 @@ std::optional<PEB32> ProcessManagement32::getPEB() {
 	return peb;
 }
 
-std::optional<PEB32> ProcessManagement32::getPEBWow64() {
+std::optional<PEB64> ProcessManagement32::getPEB64() {
 	if(!m_processManagement.getProcessHandle()) {
 		return std::nullopt;
 	}
 
-	auto pbi = getPBIWow64();
+	auto pbi = getPBI();
 	if(!pbi) {
 		return std::nullopt;
 	}
 
-	PEB32 peb{};
+	PEB64 peb{};
 	const auto readedMemory = m_processManagement.readMemory(reinterpret_cast<std::uint32_t>( pbi->PebBaseAddress ),
 															 reinterpret_cast<std::uint8_t*>( &peb ), sizeof(peb));
 	if(!readedMemory || readedMemory != sizeof(peb)) {
@@ -109,12 +97,4 @@ std::optional<PEB32> ProcessManagement32::getPEBWow64() {
 	}
 
 	return peb;
-}
-
-std::optional<std::uint32_t> ProcessManagement32::getPEBAddress() {
-	return std::optional<std::uint32_t>();
-}
-
-Vmm32& ProcessManagement32::getVmm() {
-	return m_vmm;
 }

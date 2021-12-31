@@ -12,10 +12,9 @@ public:
 	Vmm32& getVmm();
 	std::optional<IMAGE_NT_HEADERS32> getNtHeader();
 	std::optional<PROCESS_BASIC_INFORMATION> getPBI();
-	std::optional<PROCESS_BASIC_INFORMATION> getPBIWow64();
-	std::optional<PEB32> getPEB();
-	std::optional<PEB32> getPEBWow64();
-	std::optional<std::uint32_t> getPEBAddress();
+	std::uint32_t getPEB32FromPBI(PROCESS_BASIC_INFORMATION& pbi);
+	std::optional<PEB32> getPEB32();
+	std::optional<PEB64> getPEB64();
 
 private:
 	ProcessManagement<std::uint32_t>& m_processManagement;
