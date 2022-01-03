@@ -1,4 +1,7 @@
 #include "AntiDbg.h"
+#include "NtGlobalFlag32.h"
+#include "BeingDebugged32.h"
+
 #include <cstddef>
 
 AntiDbg::AntiDbg(std::string processName):
@@ -6,65 +9,9 @@ AntiDbg::AntiDbg(std::string processName):
 	m_processManagement32{ m_rocessManagementUM } {
 	}
 
-bool AntiDbg::isNtGlobalFlag32() {
-	auto peb = m_processManagement32.getPEB32();
-	if(!peb) {
-		return false;
-	}
-	
-	return peb->NtGlobalFlag & NT_GLOBAL_FLAG_DEBUGGED;
-}
-
-bool AntiDbg::bypassNtGlobalFlag32() {
-	auto pbi = m_processManagement32.getPBI();
-	auto peb = m_processManagement32.getPEB32();
-	if(!peb || !pbi) {
-		return false;
-	}
-	
-	auto currFlag = peb->NtGlobalFlag;
-	currFlag &= ~NT_GLOBAL_FLAG_DEBUGGED;
-
-	auto flagAddress = (std::uint32_t)m_processManagement32.getPEB32FromPBI(*pbi) + offsetof(PEB32, NtGlobalFlag);
-
-	return m_processManagement32.getVmm().putVar(currFlag, flagAddress);
-}
-
-bool AntiDbg::isNtGlobalFlag64() {
-	auto peb = m_processManagement32.getPEB64();
-	if(!peb) {
-		return false;
-	}
-
-	return peb->NtGlobalFlag & NT_GLOBAL_FLAG_DEBUGGED;
-}
-
-bool AntiDbg::bypassNtGlobalFlag64() {
-	auto pbi = m_processManagement32.getPBI();
-	auto peb = m_processManagement32.getPEB64();
-	if(!peb || !pbi) {
-		return false;
-	}
-
-	auto currFlag = peb->NtGlobalFlag;
-	currFlag &= ~NT_GLOBAL_FLAG_DEBUGGED;
-
-	auto flagAddress = ( std::uint32_t )pbi->PebBaseAddress + offsetof(PEB64, NtGlobalFlag);
-
-	return m_processManagement32.getVmm().putVar(currFlag, flagAddress);
-}
-
 bool AntiDbg::bypassAll() {
-	if(isNtGlobalFlag32()) {
-		if(!bypassNtGlobalFlag32()) {
-			return false;
-		}
-	}
-	if(isNtGlobalFlag64()) {
-		if(!bypassNtGlobalFlag64()) {
-			return false;
-		}
-	}
+	auto isNtGlobalFlag32Bypass = NtGlobalFlag32(m_processManagement32).bypass();
+	auto beingDebugged32 = BeingDebugged32(m_processManagement32).bypass();
 
 	return true;
 }

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\bypass">
+      <UniqueIdentifier>{32770402-0915-4a70-9e3e-2d17bfee4bbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bypass">
+      <UniqueIdentifier>{37752be7-4367-4189-83b2-137e18b85729}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AntiDbgBypass.cpp">
@@ -34,6 +40,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Vmm32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtGlobalFlag32.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
+    <ClCompile Include="BeingDebugged32.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseBypass32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,6 +78,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vmm32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NtGlobalFlag32.h">
+      <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="BeingDebugged32.h">
+      <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseBypass32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

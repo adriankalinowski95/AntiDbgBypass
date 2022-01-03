@@ -144,6 +144,9 @@
   <ItemGroup>
     <ClCompile Include="AntiDbg.cpp" />
     <ClCompile Include="AntiDbgBypass.cpp" />
+    <ClCompile Include="BaseBypass32.cpp" />
+    <ClCompile Include="BeingDebugged32.cpp" />
+    <ClCompile Include="NtGlobalFlag32.cpp" />
     <ClCompile Include="ProcessManagement32.cpp" />
     <ClCompile Include="ProcessManagement64.cpp" />
     <ClCompile Include="ProcessManagementUM.cpp" />
@@ -152,7 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
+    <ClInclude Include="BaseBypass32.h" />
+    <ClInclude Include="BeingDebugged32.h" />
     <ClInclude Include="ntddk.h" />
+    <ClInclude Include="NtGlobalFlag32.h" />
     <ClInclude Include="peb.h" />
     <ClInclude Include="ProcessManagement.h" />
     <ClInclude Include="ProcessManagement32.h" />
