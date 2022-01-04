@@ -97,7 +97,7 @@ std::optional<IMAGE_NT_HEADERS32> ProcessManagementUtils::getNtHeaders32(std::ui
 		return std::nullopt;
 	}
 
-	if(sizeof(IMAGE_DOS_HEADER) < size) {
+	if(sizeof(IMAGE_DOS_HEADER) > size) {
 		return std::nullopt;
 	}
 
@@ -119,6 +119,7 @@ std::optional<IMAGE_NT_HEADERS32> ProcessManagementUtils::getNtHeaders32(std::ui
 	return imageNtHeaders;
 }
 
+// buffer is 0x1000 from base address
 std::optional<IMAGE_DATA_DIRECTORY> ProcessManagementUtils::getPEDirectory32(PVOID pe_buffer, std::uint32_t size, std::uint32_t dir_id) {
 	if(dir_id >= IMAGE_NUMBEROF_DIRECTORY_ENTRIES){
 		return std::nullopt;

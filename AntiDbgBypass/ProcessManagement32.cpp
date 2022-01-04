@@ -98,3 +98,32 @@ std::optional<PEB64> ProcessManagement32::getPEB64() {
 
 	return peb;
 }
+
+std::optional<ProcessManagement32::ImgLoadConfDir32_V> ProcessManagement32::getImageLoadConfigDirectory() {
+	if(!m_processManagement.getProcessHandle()) {
+		return std::nullopt;
+	}
+
+	auto baseAddress = ProcessManagementUtils::getProcessBaseAddress(m_processManagement.getProcessHandle().value());
+	if(!baseAddress) {
+		return std::nullopt;
+	}
+
+	std::uint8_t headersBuf[Page_Size];
+	auto readBytes = m_processManagement.readMemory(*baseAddress, headersBuf, sizeof(headersBuf));
+	if(!readBytes) {
+		return std::nullopt;
+	}
+
+	const auto loadConfig = ProcessManagementUtils::getPEDirectory32(headersBuf, Page_Size, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	if(!loadConfig) {
+		return std::nullopt;
+	}
+
+	IMAGE_LOAD_CONFIG_DIRECTORY32 imageLoadConfigDirectory{};
+	if(!m_vmm.getVar(imageLoadConfigDirectory, loadConfig->VirtualAddress + *baseAddress)) {
+		return std::nullopt;
+	}
+	
+	return std::make_pair(loadConfig->VirtualAddress + *baseAddress, imageLoadConfigDirectory);
+}

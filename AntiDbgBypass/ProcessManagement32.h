@@ -7,6 +7,8 @@
 
 class ProcessManagement32 {
 public:
+	using ImgLoadConfDir32_V = std::pair<std::uint32_t, IMAGE_LOAD_CONFIG_DIRECTORY32>;
+
 	ProcessManagement32(ProcessManagement<std::uint32_t>& processManagment);
 	~ProcessManagement32();
 	Vmm32& getVmm();
@@ -15,6 +17,7 @@ public:
 	std::uint32_t getPEB32FromPBI(PROCESS_BASIC_INFORMATION& pbi);
 	std::optional<PEB32> getPEB32();
 	std::optional<PEB64> getPEB64();
+	std::optional<ImgLoadConfDir32_V> getImageLoadConfigDirectory();
 
 private:
 	ProcessManagement<std::uint32_t>& m_processManagement;
