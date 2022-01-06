@@ -51,10 +51,10 @@
     <ClCompile Include="BaseBypass32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProcessHeapBypass32.cpp">
+    <ClCompile Include="GlobalFlagsClear32.cpp">
       <Filter>Source Files\bypass</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalFlagsClear32.cpp">
+    <ClCompile Include="ProcessHeapFlags32.cpp">
       <Filter>Source Files\bypass</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,10 +95,10 @@
     <ClInclude Include="BaseBypass32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProcessHeapBypass32.h">
+    <ClInclude Include="GlobalFlagsClear32.h">
       <Filter>Header Files\bypass</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalFlagsClear32.h">
+    <ClInclude Include="ProcessHeapFlags32.h">
       <Filter>Header Files\bypass</Filter>
     </ClInclude>
   </ItemGroup>

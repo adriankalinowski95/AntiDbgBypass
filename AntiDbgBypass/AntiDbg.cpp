@@ -2,6 +2,7 @@
 #include "NtGlobalFlag32.h"
 #include "GlobalFlagsClear32.h"
 #include "BeingDebugged32.h"
+#include "ProcessHeapFlags32.h"
 
 #include <cstddef>
 
@@ -14,6 +15,7 @@ bool AntiDbg::bypassAll() {
 	auto isNtGlobalFlag32Bypass = NtGlobalFlag32(m_processManagement32).bypass();
 	auto beingDebugged32Bypass = BeingDebugged32(m_processManagement32).bypass();
 	auto globalFlagClear32Bypass = GlobalFlagsClear32(m_processManagement32).bypass();
+	auto processHeap32Bypass = ProcessHeapFlags32(m_processManagement32).bypass();
 
 	return true;
 }

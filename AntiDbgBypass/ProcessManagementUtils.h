@@ -35,7 +35,8 @@ public:
 	static std::optional<std::uint64_t> getProcessBaseAddress(HANDLE processHandle);
 	static std::optional<IMAGE_NT_HEADERS32> getNtHeaders32(std::uint8_t* peBuffer, std::uint32_t size);
 	static std::optional <IMAGE_DATA_DIRECTORY> getPEDirectory32(PVOID pe_buffer, std::uint32_t size, std::uint32_t dir_id);
-
+	static WORD getVersionWord();
+	static bool isVistaOrHigher();
 private:
 	static constexpr std::uint32_t Max_Process_Names_Count = 0x1000;
 };

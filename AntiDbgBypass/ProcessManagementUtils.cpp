@@ -2,6 +2,7 @@
 #include <tlhelp32.h>
 #include "psapi.h"
 #include "ntddk.h"
+#include <sysinfoapi.h>
 
 std::optional<std::uint32_t> ProcessManagementUtils::getProcessIDByName(std::string processName) {
 	if (processName.empty()) {
@@ -140,4 +141,15 @@ std::optional<IMAGE_DATA_DIRECTORY> ProcessManagementUtils::getPEDirectory32(PVO
 	memcpy(&imageDataDirectory, peDir,sizeof(IMAGE_DATA_DIRECTORY));
 
 	return imageDataDirectory;
+}
+
+#pragma warning(disable : 4996)
+WORD ProcessManagementUtils::getVersionWord() {
+	OSVERSIONINFO verInfo = { sizeof(OSVERSIONINFO) };
+	GetVersionExW(&verInfo);
+	return MAKEWORD(verInfo.dwMinorVersion, verInfo.dwMajorVersion);
+}
+
+bool ProcessManagementUtils::isVistaOrHigher() {
+	return getVersionWord() >= _WIN32_WINNT_VISTA;
 }
