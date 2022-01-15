@@ -1,6 +1,7 @@
 #include "ProcessManagement32.h"
 #include <Windows.h>
 #include "psapi.h"
+#include "RemoteOps.h"
 
 ProcessManagement32::ProcessManagement32(ProcessManagement<std::uint32_t>& processManagment):
 					m_processManagement{ processManagment },
@@ -24,7 +25,7 @@ std::optional<IMAGE_NT_HEADERS32> ProcessManagement32::getNtHeader() {
 		return std::nullopt;
 	}
 
-	std::uint8_t headersBuf[Page_Size];
+	std::uint8_t headersBuf[ProcessManagementUtils::Page_Size];
 	auto readBytes = m_processManagement.readMemory(*baseAddress, headersBuf, sizeof(headersBuf));
 	if(!readBytes) {
 		return std::nullopt;
@@ -57,7 +58,7 @@ std::optional<PROCESS_BASIC_INFORMATION> ProcessManagement32::getPBI() {
 }
 
 std::uint32_t ProcessManagement32::getPEB32FromPBI(PROCESS_BASIC_INFORMATION& pbi) {
-	return reinterpret_cast<std::uint32_t>(pbi.PebBaseAddress) + Page_Size;
+	return reinterpret_cast<std::uint32_t>(pbi.PebBaseAddress) + ProcessManagementUtils::Page_Size;
 }
 
 std::optional<PEB32> ProcessManagement32::getPEB32() {
@@ -109,13 +110,13 @@ std::optional<ProcessManagement32::ImgLoadConfDir32_V> ProcessManagement32::getI
 		return std::nullopt;
 	}
 
-	std::uint8_t headersBuf[Page_Size];
+	std::uint8_t headersBuf[ProcessManagementUtils::Page_Size];
 	auto readBytes = m_processManagement.readMemory(*baseAddress, headersBuf, sizeof(headersBuf));
 	if(!readBytes) {
 		return std::nullopt;
 	}
 
-	const auto loadConfig = ProcessManagementUtils::getPEDirectory32(headersBuf, Page_Size, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	const auto loadConfig = ProcessManagementUtils::getPEDirectory32(headersBuf, ProcessManagementUtils::Page_Size, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
 	if(!loadConfig) {
 		return std::nullopt;
 	}
@@ -126,4 +127,42 @@ std::optional<ProcessManagement32::ImgLoadConfDir32_V> ProcessManagement32::getI
 	}
 	
 	return std::make_pair(loadConfig->VirtualAddress + *baseAddress, imageLoadConfigDirectory);
+}
+
+std::optional<HMODULE> ProcessManagement32::getRemoteModuleHandle(LPCSTR lpModuleName) {
+	if(!m_processManagement.getProcessHandle()) {
+		return std::nullopt;
+	}
+
+	return RemoteOps::GetRemoteModuleHandle(*m_processManagement.getProcessHandle(), lpModuleName);
+}
+
+std::optional<FARPROC> ProcessManagement32::getRemoteProcAddress(HMODULE hModule, LPCSTR lpProcName, UINT Ordinal, BOOL UseOrdinal) {
+	if(!m_processManagement.getProcessHandle()) {
+		return std::nullopt;
+	}
+
+	return RemoteOps::GetRemoteProcAddress(*m_processManagement.getProcessHandle(), hModule, lpProcName, Ordinal, UseOrdinal);
+}
+
+std::optional<std::uint32_t> ProcessManagement32::injectData(std::vector<std::uint8_t>& data) {
+	std::uint32_t allocSize = data.size();
+	if(allocSize % ProcessManagementUtils::Page_Size) {
+		allocSize += ProcessManagementUtils::Page_Size - ( allocSize % ProcessManagementUtils::Page_Size );
+	}
+
+	auto injectAreaVa = m_processManagement.allocMemory(allocSize, PAGE_EXECUTE_READWRITE);
+	if(!injectAreaVa) {
+		return std::nullopt;
+	}
+
+	if(!m_processManagement.writeMemory(*injectAreaVa, data.data(), data.size())) {
+		return false;
+	}
+
+	return injectAreaVa;
+}
+
+bool ProcessManagement32::freeMemory(std::uint32_t address) {
+	return m_processManagement.freeMemory(address);
 }

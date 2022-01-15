@@ -78,9 +78,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -118,6 +120,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\disasm-lib;C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\mhook-lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +136,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\disasm-lib;C:\AntiDbgBypass\AntiDbgBypass\AntiDbgBypass\mhook-lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,20 +150,28 @@
     <ClCompile Include="AntiDbgBypass.cpp" />
     <ClCompile Include="BaseBypass32.cpp" />
     <ClCompile Include="BeingDebugged32.cpp" />
+    <ClCompile Include="CheckRemoteDebuggerPresent32.cpp" />
     <ClCompile Include="GlobalFlagsClear32.cpp" />
+    <ClCompile Include="Hook32.cpp" />
+    <ClCompile Include="hooklib.cpp" />
     <ClCompile Include="NtGlobalFlag32.cpp" />
     <ClCompile Include="ProcessHeapFlags32.cpp" />
     <ClCompile Include="ProcessManagement32.cpp" />
     <ClCompile Include="ProcessManagement64.cpp" />
     <ClCompile Include="ProcessManagementUM.cpp" />
     <ClCompile Include="ProcessManagementUtils.cpp" />
+    <ClCompile Include="RemoteOps.cpp" />
+    <ClCompile Include="ThreadLocalStorage.cpp" />
     <ClCompile Include="Vmm32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
     <ClInclude Include="BaseBypass32.h" />
     <ClInclude Include="BeingDebugged32.h" />
+    <ClInclude Include="CheckRemoteDebuggerPresent32.h" />
     <ClInclude Include="GlobalFlagsClear32.h" />
+    <ClInclude Include="Hook32.h" />
+    <ClInclude Include="hooklib.hpp" />
     <ClInclude Include="ntddk.h" />
     <ClInclude Include="NtGlobalFlag32.h" />
     <ClInclude Include="peb.h" />
@@ -169,6 +181,8 @@
     <ClInclude Include="ProcessManagement64.h" />
     <ClInclude Include="ProcessManagementUtils.h" />
     <ClInclude Include="ProcessManagementUM.h" />
+    <ClInclude Include="RemoteOps.h" />
+    <ClInclude Include="ThreadLocalStorage.h" />
     <ClInclude Include="Vmm32.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

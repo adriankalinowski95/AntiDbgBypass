@@ -57,6 +57,21 @@
     <ClCompile Include="ProcessHeapFlags32.cpp">
       <Filter>Source Files\bypass</Filter>
     </ClCompile>
+    <ClCompile Include="ThreadLocalStorage.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
+    <ClCompile Include="Hook32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteOps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckRemoteDebuggerPresent32.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
+    <ClCompile Include="hooklib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -100,6 +115,21 @@
     </ClInclude>
     <ClInclude Include="ProcessHeapFlags32.h">
       <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadLocalStorage.h">
+      <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="Hook32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoteOps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckRemoteDebuggerPresent32.h">
+      <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="hooklib.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

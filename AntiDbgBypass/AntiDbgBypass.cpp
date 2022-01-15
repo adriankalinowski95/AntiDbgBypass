@@ -7,8 +7,8 @@
 #include "ProcessManagementUtils.h"
 
 #include "AntiDbg.h"
-
-constexpr static const char Process_Name[] = "al-khaser.exe";
+// al-khaser.exe
+constexpr static const char Process_Name[] = "HookTest.exe";
 
 int main()
 {
