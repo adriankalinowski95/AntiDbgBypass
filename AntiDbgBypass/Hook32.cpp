@@ -20,6 +20,11 @@ std::vector<uint8_t> shellcode2 = {
  0xC2 ,0x04 ,0x00
 };
 
+std::vector<uint8_t> NtQueryInformationProcessShellcode = { 0x55,0x8b,0xec,0x8b,0x45,0x0c,0x83,0x38,0x07,0x75,
+0x09,0x8b,0x4d,0x0c,0xc7,0x01,0x00,0x00,0x00,0x00,
+0x5d,0xc2,0x14,0x00 };
+
+
 Hook32::Hook32(ProcessManagement32& processManagement): m_processManagement32{ processManagement } {}
 
 bool Hook32::createHook(std::uint32_t overwriteVa, std::uint32_t hookFunctionVa, std::uint8_t paramsCount) {
@@ -128,16 +133,16 @@ bool Hook32::overwriteNtQueryInformationProcess() {
 		return false;
 	}
 
-	auto procAddress = m_processManagement32.getRemoteProcAddress(*moduleHandle, "DbgPrint", 0, 0);
+	auto procAddress = m_processManagement32.getRemoteProcAddress(*moduleHandle, "NtQueryInformationProcess", 0, 0);
 	if(!procAddress) {
 		return false;
 	}
 
-	auto newNtQueryInformationProcess = m_processManagement32.injectData(shellcode2);
+	auto newNtQueryInformationProcess = m_processManagement32.injectData(NtQueryInformationProcessShellcode);
 	if(!newNtQueryInformationProcess) {
 		return false;
 	}
 
-	return createHook((std::uint32_t)*procAddress, *newNtQueryInformationProcess,1);
+	return createHook((std::uint32_t)*procAddress, *newNtQueryInformationProcess, 5);
 }
 

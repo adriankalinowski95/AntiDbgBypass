@@ -24,5 +24,6 @@ private:
 	std::uint32_t getJumpShellcodeSize();
 	constexpr static std::uint32_t Jump_Shellcode_Size = 5;
 	constexpr static std::uint32_t Jump_Back_Shellcode_Size = 5;
+	constexpr static std::uint8_t Nt_Query_Information_Process_Args = 5;
 };
 
