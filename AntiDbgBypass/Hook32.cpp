@@ -24,7 +24,6 @@ std::vector<uint8_t> NtQueryInformationProcessShellcode = { 0x55,0x8b,0xec,0x8b,
 0x09,0x8b,0x4d,0x0c,0xc7,0x01,0x00,0x00,0x00,0x00,
 0x5d,0xc2,0x14,0x00 };
 
-
 Hook32::Hook32(ProcessManagement32& processManagement): m_processManagement32{ processManagement } {}
 
 bool Hook32::createHook(std::uint32_t overwriteVa, std::uint32_t hookFunctionVa, std::uint8_t paramsCount) {
@@ -77,41 +76,59 @@ std::vector<std::uint8_t> Hook32::getOverwritedCode(std::uint32_t overwriteVa, s
 std::optional<Hook32::Shellcode> Hook32::getDetour(std::uint32_t hookFunctionVa, std::uint8_t paramsCount, std::uint32_t returnAddress, std::vector<uint8_t>& overwritedCode) {
 	// pop ebx
 	// call address
-	// add esp, 4 * params
+	// sub esp, 4 * params
 	// overwrited code
 	// push ebx
 	// jmp ebx
 
 	std::uint8_t popEbx = 0x5B;
+	std::vector<std::uint8_t> pushPtrsToParams;
+	std::uint8_t pushEax = 0x50;
+	std::uint8_t pushEcx = 0x51;
+	std::vector<std::uint8_t> pushArg = { 0xFF, 0x74, 0x24, 0x08 };
+	std::vector<std::uint8_t> leaEax = { 0x8D, 0x44, 0x24, 0x08 };
+	std::vector<std::uint8_t> movEaxEsp = { 0x89, 0xE0 };
+	std::vector<std::uint8_t> pushEaxWithOffset = { 0xFF, 0x70, 0x04 };
+	std::vector<std::uint8_t> leaEcxEax = { 0x8D, 0x48, 0x04 };
 	std::vector<std::uint8_t> callAddress = { 0xE8, 0xFB, 0xFF, 0xFF, 0xFF };
 	std::vector<std::uint8_t> subEsp = { 0x83, 0xEC, (std::uint8_t)(4 * paramsCount)};
 	std::vector<std::uint8_t> jmpBackShellcode = { 0xE9, 0xFB, 0xFF, 0xFF, 0xFF };
 	std::uint8_t pushEbx = 0x53;
 
-	auto allocSize = sizeof(popEbx) + callAddress.size() + subEsp.size() + overwritedCode.size() + jmpBackShellcode.size() + sizeof(pushEbx);
-	auto detourVa = m_processManagement32.getVmm().allocMemory(allocSize,PAGE_EXECUTE_READWRITE);
+	pushPtrsToParams.insert(pushPtrsToParams.end(), movEaxEsp.begin(), movEaxEsp.end());
+	for(int i = 0; i < paramsCount;i++) {
+		leaEcxEax[2] = paramsCount * 0x4 - 0x4 - i*4;
+		pushPtrsToParams.insert(pushPtrsToParams.end(), leaEcxEax.begin(), leaEcxEax.end());
+		pushPtrsToParams.push_back(pushEcx);
+	}
+
+	// auto allocSize = sizeof(popEbx) + callAddress.size() + subEsp.size() + overwritedCode.size() + jmpBackShellcode.size() + sizeof(pushEbx);
+	auto allocSize = sizeof(popEbx) + callAddress.size() + overwritedCode.size() + jmpBackShellcode.size() + sizeof(pushEbx) + pushPtrsToParams.size();
+	auto detourVa = m_processManagement32.getVmm().allocMemory(allocSize,PAGE_EXECUTE_READWRITE); 
 	if(!detourVa) {
 		return std::nullopt;
 	}
 
-	auto hookNearVa = ( hookFunctionVa - (*detourVa + 1 )) - getJumpShellcodeSize();
+	auto hookNearVa = ( hookFunctionVa - (*detourVa + sizeof(popEbx) + pushPtrsToParams.size() )) - getJumpShellcodeSize();
 	callAddress[1] = ( hookNearVa ) & 0xFF;
 	callAddress[2] = ( hookNearVa >> 8 ) & 0xFF;
 	callAddress[3] = ( hookNearVa >> 16 ) & 0xFF;
 	callAddress[4] = ( hookNearVa >> 24 ) & 0xFF;
 
-	auto detourOffset = sizeof(popEbx) + callAddress.size() + subEsp.size() + overwritedCode.size();
+	// auto detourOffset = sizeof(popEbx) + callAddress.size() + subEsp.size() + overwritedCode.size();
+	auto detourOffset = sizeof(popEbx) + callAddress.size() + overwritedCode.size() + pushPtrsToParams.size();
 	auto returnAddressNearVa = ( returnAddress - ( *detourVa + detourOffset ) ) - getJumpShellcodeSize() - 1 ;
 	jmpBackShellcode[1] = ( returnAddressNearVa ) & 0xFF;
 	jmpBackShellcode[2] = ( returnAddressNearVa >> 8 ) & 0xFF;
 	jmpBackShellcode[3] = ( returnAddressNearVa >> 16 ) & 0xFF;
 	jmpBackShellcode[4] = ( returnAddressNearVa >> 24 ) & 0xFF;
 
-
 	std::vector<std::uint8_t> fullShellcode;
 	fullShellcode.push_back(popEbx);
+	fullShellcode.insert(fullShellcode.end(), pushPtrsToParams.begin(), pushPtrsToParams.end());
 	fullShellcode.insert(fullShellcode.end(), callAddress.begin(), callAddress.end());
-	fullShellcode.insert(fullShellcode.end(), subEsp.begin(), subEsp.end());
+	// fullShellcode.insert(fullShellcode.end(), subEsp.begin(), subEsp.end());
+
 	fullShellcode.push_back(pushEbx);
 	fullShellcode.insert(fullShellcode.end(), overwritedCode.begin(), overwritedCode.end());
 	fullShellcode.insert(fullShellcode.end(), jmpBackShellcode.begin(), jmpBackShellcode.end());
