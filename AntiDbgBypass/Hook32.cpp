@@ -73,62 +73,74 @@ std::vector<std::uint8_t> Hook32::getOverwritedCode(std::uint32_t overwriteVa, s
 	return oldData;
 }
 
+std::vector<std::uint8_t> Hook32::getBranchChanges(std::uint8_t prefix, std::uint32_t functionVa, std::uint32_t overwritedVa) {
+	std::vector<std::uint8_t> changeBranchInstr(getJumpShellcodeSize(),0);
+	changeBranchInstr[0] = prefix;
+
+	auto hookNearVa = functionVa - overwritedVa - getJumpShellcodeSize();
+	changeBranchInstr[1] = ( hookNearVa ) & 0xFF;
+	changeBranchInstr[2] = ( hookNearVa >> 8 ) & 0xFF;
+	changeBranchInstr[3] = ( hookNearVa >> 16 ) & 0xFF;
+	changeBranchInstr[4] = ( hookNearVa >> 24 ) & 0xFF;
+
+	return changeBranchInstr;
+}
+
+std::vector<std::uint8_t> Hook32::getJumpOverwrite(std::uint32_t functionVa, std::uint32_t overwritedVa) {
+	return getBranchChanges(0xE9, functionVa, overwritedVa);
+}
+
+std::vector<std::uint8_t> Hook32::getCallOverwrite(std::uint32_t functionVa, std::uint32_t overwritedVa) {
+	return getBranchChanges(0xE8, functionVa, overwritedVa);
+}
+
+std::vector<std::uint8_t> Hook32::getParamsPointers(std::uint8_t paramsCount) {
+	std::vector<std::uint8_t> paramsPointers;
+	std::vector<std::uint8_t> leaEcxEax = { 0x8D, 0x48, 0x04 };
+	std::vector<std::uint8_t> movEaxEsp = { 0x89, 0xE0 };
+	std::uint8_t pushEcx = 0x51;
+
+	paramsPointers.insert(paramsPointers.end(), movEaxEsp.begin(), movEaxEsp.end());
+	for(int i = 0; i < paramsCount;i++) {
+		leaEcxEax[2] = paramsCount * 0x4 - 0x4 - i * 4;
+		paramsPointers.insert(paramsPointers.end(), leaEcxEax.begin(), leaEcxEax.end());
+		paramsPointers.push_back(pushEcx);
+	}
+
+	return paramsPointers;
+}
+
 std::optional<Hook32::Shellcode> Hook32::getDetour(std::uint32_t hookFunctionVa, std::uint8_t paramsCount, std::uint32_t returnAddress, std::vector<uint8_t>& overwritedCode) {
 	// pop ebx
+	// mov eax, esp 
+	// lea ecx, [eax + offset] // paramsCount times
+	// push ecx                // 
 	// call address
-	// sub esp, 4 * params
 	// overwrited code
 	// push ebx
 	// jmp ebx
 
 	std::uint8_t popEbx = 0x5B;
-	std::vector<std::uint8_t> pushPtrsToParams;
-	std::uint8_t pushEax = 0x50;
-	std::uint8_t pushEcx = 0x51;
-	std::vector<std::uint8_t> pushArg = { 0xFF, 0x74, 0x24, 0x08 };
-	std::vector<std::uint8_t> leaEax = { 0x8D, 0x44, 0x24, 0x08 };
-	std::vector<std::uint8_t> movEaxEsp = { 0x89, 0xE0 };
-	std::vector<std::uint8_t> pushEaxWithOffset = { 0xFF, 0x70, 0x04 };
-	std::vector<std::uint8_t> leaEcxEax = { 0x8D, 0x48, 0x04 };
-	std::vector<std::uint8_t> callAddress = { 0xE8, 0xFB, 0xFF, 0xFF, 0xFF };
-	std::vector<std::uint8_t> subEsp = { 0x83, 0xEC, (std::uint8_t)(4 * paramsCount)};
-	std::vector<std::uint8_t> jmpBackShellcode = { 0xE9, 0xFB, 0xFF, 0xFF, 0xFF };
 	std::uint8_t pushEbx = 0x53;
+	
+	auto pushPtrsToParams = getParamsPointers(paramsCount);
 
-	pushPtrsToParams.insert(pushPtrsToParams.end(), movEaxEsp.begin(), movEaxEsp.end());
-	for(int i = 0; i < paramsCount;i++) {
-		leaEcxEax[2] = paramsCount * 0x4 - 0x4 - i*4;
-		pushPtrsToParams.insert(pushPtrsToParams.end(), leaEcxEax.begin(), leaEcxEax.end());
-		pushPtrsToParams.push_back(pushEcx);
-	}
-
-	// auto allocSize = sizeof(popEbx) + callAddress.size() + subEsp.size() + overwritedCode.size() + jmpBackShellcode.size() + sizeof(pushEbx);
-	auto allocSize = sizeof(popEbx) + callAddress.size() + overwritedCode.size() + jmpBackShellcode.size() + sizeof(pushEbx) + pushPtrsToParams.size();
+	auto allocSize = sizeof(popEbx) + Call_Shellcode_Size + overwritedCode.size() + Jump_Shellcode_Size + sizeof(pushEbx) + pushPtrsToParams.size();
 	auto detourVa = m_processManagement32.getVmm().allocMemory(allocSize,PAGE_EXECUTE_READWRITE); 
 	if(!detourVa) {
 		return std::nullopt;
 	}
 
-	auto hookNearVa = ( hookFunctionVa - (*detourVa + sizeof(popEbx) + pushPtrsToParams.size() )) - getJumpShellcodeSize();
-	callAddress[1] = ( hookNearVa ) & 0xFF;
-	callAddress[2] = ( hookNearVa >> 8 ) & 0xFF;
-	callAddress[3] = ( hookNearVa >> 16 ) & 0xFF;
-	callAddress[4] = ( hookNearVa >> 24 ) & 0xFF;
+	auto detourHookVa = *detourVa + sizeof(popEbx) + pushPtrsToParams.size();
+	auto callAddress = getCallOverwrite(hookFunctionVa, detourHookVa);
+	
+	auto jmpBackPlaceVa = *detourVa + sizeof(popEbx) + sizeof(pushEbx) + callAddress.size() + overwritedCode.size() + pushPtrsToParams.size();
+	auto jmpBackShellcode = getJumpOverwrite(returnAddress, jmpBackPlaceVa);
 
-	// auto detourOffset = sizeof(popEbx) + callAddress.size() + subEsp.size() + overwritedCode.size();
-	auto detourOffset = sizeof(popEbx) + callAddress.size() + overwritedCode.size() + pushPtrsToParams.size();
-	auto returnAddressNearVa = ( returnAddress - ( *detourVa + detourOffset ) ) - getJumpShellcodeSize() - 1 ;
-	jmpBackShellcode[1] = ( returnAddressNearVa ) & 0xFF;
-	jmpBackShellcode[2] = ( returnAddressNearVa >> 8 ) & 0xFF;
-	jmpBackShellcode[3] = ( returnAddressNearVa >> 16 ) & 0xFF;
-	jmpBackShellcode[4] = ( returnAddressNearVa >> 24 ) & 0xFF;
-
-	std::vector<std::uint8_t> fullShellcode;
+	std::vector<std::uint8_t> fullShellcode{};
 	fullShellcode.push_back(popEbx);
 	fullShellcode.insert(fullShellcode.end(), pushPtrsToParams.begin(), pushPtrsToParams.end());
 	fullShellcode.insert(fullShellcode.end(), callAddress.begin(), callAddress.end());
-	// fullShellcode.insert(fullShellcode.end(), subEsp.begin(), subEsp.end());
-
 	fullShellcode.push_back(pushEbx);
 	fullShellcode.insert(fullShellcode.end(), overwritedCode.begin(), overwritedCode.end());
 	fullShellcode.insert(fullShellcode.end(), jmpBackShellcode.begin(), jmpBackShellcode.end());
