@@ -28,7 +28,7 @@ Hook32::Hook32(ProcessManagement32& processManagement): m_processManagement32{ p
 
 bool Hook32::createHook(std::uint32_t overwriteVa, std::uint32_t hookFunctionVa, std::uint8_t paramsCount) {
 	auto overwritedCode = getOverwritedCode(overwriteVa, getJumpShellcodeSize());
-	auto detour = getDetour(hookFunctionVa, paramsCount, overwriteVa + getJumpShellcodeSize(), overwritedCode);
+	auto detour = getDetour(hookFunctionVa, paramsCount, overwriteVa + getJumpShellcodeSize(), overwritedCode, 2);
 	if(!detour) {
 		return false;
 	}
@@ -90,8 +90,53 @@ std::vector<std::uint8_t> Hook32::getJumpOverwrite(std::uint32_t functionVa, std
 	return getBranchChanges(0xE9, functionVa, overwritedVa);
 }
 
+std::vector<std::uint8_t> Hook32::getCmpEax(std::uint32_t value) {
+	std::vector<std::uint8_t> cmp(Cmp_Shellcode_Size, 0);
+	cmp[0] = 0x3D;
+	cmp[1] = ( value ) & 0xFF;
+	cmp[2] = ( value >> 8 ) & 0xFF;
+	cmp[3] = ( value >> 16 ) & 0xFF;
+	cmp[4] = ( value >> 24 ) & 0xFF;
+
+	return cmp;
+}
+
+std::vector<std::uint8_t> Hook32::getMovEax(std::uint32_t value) {
+	std::vector<std::uint8_t> movEax(Mov_Eax_Shellcode_Size, 0);
+	movEax[0] = 0xB8;
+	movEax[1] = ( value ) & 0xFF;
+	movEax[2] = ( value >> 8 ) & 0xFF;
+	movEax[3] = ( value >> 16 ) & 0xFF;
+	movEax[4] = ( value >> 24 ) & 0xFF;
+
+	return movEax;
+}
+
 std::vector<std::uint8_t> Hook32::getCallOverwrite(std::uint32_t functionVa, std::uint32_t overwritedVa) {
 	return getBranchChanges(0xE8, functionVa, overwritedVa);
+}
+
+std::vector<std::uint8_t> Hook32::getJEShellcode(std::uint32_t labelVa, std::uint32_t overwritedVa) {
+	std::vector<std::uint8_t> changeBranchInstr(Je_Shellcode_Size, 0);
+	changeBranchInstr[0] = 0xf;
+	changeBranchInstr[1] = 0x84;
+
+	auto hookNearVa = labelVa - overwritedVa - Je_Shellcode_Size;
+	changeBranchInstr[2] = ( hookNearVa ) & 0xFF;
+	changeBranchInstr[3] = ( hookNearVa >> 8 ) & 0xFF;
+	changeBranchInstr[4] = ( hookNearVa >> 16 ) & 0xFF;
+	changeBranchInstr[5] = ( hookNearVa >> 24 ) & 0xFF;
+
+	return changeBranchInstr;
+}
+
+std::vector<std::uint8_t> Hook32::getRetN(std::uint16_t value) {
+	std::vector<std::uint8_t> retn(RetN_Shellcode_Size, 0);
+	retn[0] = 0xC2;
+	retn[1] = ( value ) & 0xFF;
+	retn[2] = ( value >> 8 ) & 0xFF;
+
+	return retn;
 }
 
 std::vector<std::uint8_t> Hook32::getParamsPointers(std::uint8_t paramsCount) {
@@ -118,7 +163,13 @@ std::optional<Hook32::Shellcode> Hook32::getDetour(std::uint32_t hookFunctionVa,
 	// call address
 	// overwrited code
 	// push ebx
+	// cmp eax, 0x997
+	// je powrot_z_funkcji
+	// mov eax, 0
 	// jmp ebx
+	// powrot_z_funkcji
+	// odpowedni mov eax,( ustawiniew artosci zwracanej)
+	// ret n
 
 	std::uint8_t popEbx = 0x5B;
 	std::uint8_t pushEbx = 0x53;
@@ -156,6 +207,72 @@ std::optional<Hook32::Shellcode> Hook32::getDetour(std::uint32_t hookFunctionVa,
 	return myShellcode;
 }
 
+std::optional<Hook32::Shellcode> Hook32::getDetour(std::uint32_t hookFunctionVa, std::uint8_t paramsCount, std::uint32_t returnAddress, std::vector<uint8_t>& overwritedCode, std::uint32_t retValue) {
+	// pop ebx
+	// mov eax, esp 
+	// lea ecx, [eax + offset] // paramsCount times
+	// push ecx                // 
+	// call address
+	// overwrited code
+	// push ebx
+	// cmp eax, 0x997
+	// je powrot_z_funkcji
+	// mov eax, 0
+	// jmp ebx
+	// powrot_z_funkcji
+	// odpowedni mov eax,( ustawiniew artosci zwracanej)
+	// ret n
+
+	std::uint8_t popEbx = 0x5B;
+	std::uint8_t pushEbx = 0x53;
+
+	auto pushPtrsToParams = getParamsPointers(paramsCount);
+
+	auto allocSize = sizeof(popEbx) + Call_Shellcode_Size + overwritedCode.size() + Jump_Shellcode_Size + sizeof(pushEbx) + pushPtrsToParams.size();
+	auto detourVa = m_processManagement32.getVmm().allocMemory(allocSize, PAGE_EXECUTE_READWRITE);
+	if(!detourVa) {
+		return std::nullopt;
+	}
+
+	auto detourHookVa = *detourVa + sizeof(popEbx) + pushPtrsToParams.size();
+	auto callAddress = getCallOverwrite(hookFunctionVa, detourHookVa);
+
+	auto cmpEax = getCmpEax(1);
+
+	auto movEax = getMovEax(0);
+
+
+	auto jeBackFromFunctionPlaceVa = *detourVa + sizeof(popEbx) + pushPtrsToParams.size() + callAddress.size() + overwritedCode.size() + sizeof(pushEbx) + cmpEax.size() + Je_Shellcode_Size + Mov_Eax_Shellcode_Size + Jump_Back_Shellcode_Size;
+	auto jeBackFromFunctionShellcode = getJumpOverwrite(returnAddress, jeBackFromFunctionPlaceVa);
+
+	auto jmpBackPlaceVa = *detourVa + sizeof(popEbx) + sizeof(pushEbx) + callAddress.size() + overwritedCode.size() + pushPtrsToParams.size() + cmpEax.size();
+	auto jmpBackShellcode = getJumpOverwrite(returnAddress, jmpBackPlaceVa);
+
+	auto movRetEax = getMovEax(retValue);
+	auto retn = getRetN(paramsCount * 4);
+
+	std::vector<std::uint8_t> fullShellcode{};
+	fullShellcode.push_back(popEbx);
+	fullShellcode.insert(fullShellcode.end(), pushPtrsToParams.begin(), pushPtrsToParams.end());
+	fullShellcode.insert(fullShellcode.end(), callAddress.begin(), callAddress.end());
+	fullShellcode.push_back(pushEbx);
+	fullShellcode.insert(fullShellcode.end(), cmpEax.begin(), cmpEax.end());
+	fullShellcode.insert(fullShellcode.end(), jeBackFromFunctionShellcode.begin(), jeBackFromFunctionShellcode.end());
+	fullShellcode.insert(fullShellcode.end(), movEax.begin(), movEax.end());
+	fullShellcode.insert(fullShellcode.end(), jmpBackShellcode.begin(), jmpBackShellcode.end());
+	fullShellcode.insert(fullShellcode.end(), movRetEax.begin(), movRetEax.end());
+	fullShellcode.insert(fullShellcode.end(), retn.begin(), retn.end());
+
+	if(!m_processManagement32.getVmm().putData(fullShellcode.data(), fullShellcode.size(), *detourVa)) {
+		return std::nullopt;
+	}
+
+	Shellcode myShellcode{};
+	myShellcode.first = *detourVa;
+	myShellcode.second = fullShellcode;
+
+	return myShellcode;
+}
 bool Hook32::overwriteNtQueryInformationProcess() {
 	auto moduleHandle = m_processManagement32.getRemoteModuleHandle("ntdll.dll");
 	if(!moduleHandle) {
@@ -174,4 +291,3 @@ bool Hook32::overwriteNtQueryInformationProcess() {
 
 	return createHook((std::uint32_t)*procAddress, *newNtQueryInformationProcess, 5);
 }
-

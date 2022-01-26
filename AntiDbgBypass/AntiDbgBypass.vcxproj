@@ -155,6 +155,7 @@
     <ClCompile Include="Hook32.cpp" />
     <ClCompile Include="hooklib.cpp" />
     <ClCompile Include="NtGlobalFlag32.cpp" />
+    <ClCompile Include="NtQueryInformationProcess32.cpp" />
     <ClCompile Include="ProcessHeapFlags32.cpp" />
     <ClCompile Include="ProcessManagement32.cpp" />
     <ClCompile Include="ProcessManagement64.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="hooklib.hpp" />
     <ClInclude Include="ntddk.h" />
     <ClInclude Include="NtGlobalFlag32.h" />
+    <ClInclude Include="NtQueryInformationProcess32.h" />
     <ClInclude Include="peb.h" />
     <ClInclude Include="ProcessHeapFlags32.h" />
     <ClInclude Include="ProcessManagement.h" />
