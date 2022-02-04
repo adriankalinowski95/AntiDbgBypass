@@ -28,6 +28,7 @@ private:
 	std::vector<std::uint8_t> getJumpOverwrite(std::uint32_t functionVa, std::uint32_t overwritedVa);
 	std::vector<std::uint8_t> getCallOverwrite(std::uint32_t functionVa, std::uint32_t overwritedVa);
 	std::vector<std::uint8_t> getJEShellcode(std::uint32_t labelVa, std::uint32_t overwritedVa);
+	std::vector<std::uint8_t> getJNEShellcode(std::uint32_t labelVa, std::uint32_t overwritedVa);
 	std::vector<std::uint8_t> getCmpEax(std::uint32_t value);
 	std::vector<std::uint8_t> getMovEax(std::uint32_t value);
 	std::vector<std::uint8_t> getRetN(std::uint16_t value);
@@ -42,5 +43,7 @@ private:
 
 	constexpr static std::uint8_t Nt_Query_Information_Process_Args = 5;
 	constexpr static std::uint8_t Nt_Query_Ret_Value = 0x1;
+
+	constexpr static std::uint32_t Not_Return = 0xBEEEEEEF;
 };
 
