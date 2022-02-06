@@ -75,6 +75,9 @@
     <ClCompile Include="NtQueryInformationProcess32.cpp">
       <Filter>Source Files\bypass</Filter>
     </ClCompile>
+    <ClCompile Include="ShellcodeGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="NtQueryInformationProcess32.h">
       <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellcodeGenerator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

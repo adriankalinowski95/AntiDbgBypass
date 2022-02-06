@@ -162,6 +162,7 @@
     <ClCompile Include="ProcessManagementUM.cpp" />
     <ClCompile Include="ProcessManagementUtils.cpp" />
     <ClCompile Include="RemoteOps.cpp" />
+    <ClCompile Include="ShellcodeGenerator.cpp" />
     <ClCompile Include="ThreadLocalStorage.cpp" />
     <ClCompile Include="Vmm32.cpp" />
   </ItemGroup>
@@ -184,6 +185,7 @@
     <ClInclude Include="ProcessManagementUtils.h" />
     <ClInclude Include="ProcessManagementUM.h" />
     <ClInclude Include="RemoteOps.h" />
+    <ClInclude Include="ShellcodeGenerator.h" />
     <ClInclude Include="ThreadLocalStorage.h" />
     <ClInclude Include="Vmm32.h" />
   </ItemGroup>
