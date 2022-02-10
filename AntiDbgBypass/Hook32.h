@@ -13,7 +13,7 @@ struct Overwrite {
 public:
 	Hook32(ProcessManagement32& processManagement);
 	bool createHook(std::uint32_t overwriteVa, std::uint32_t hookFunctionVa, std::uint8_t paramsCount);
-	bool overwriteNtQueryInformationProcess();
+	bool overwriteFunction(std::string dllName, std::string funName, std::vector<std::uint8_t>& newFun, std::uint8_t paramsCount);
 
 private:
 	ProcessManagement32& m_processManagement32;
@@ -31,9 +31,6 @@ private:
 	constexpr static std::uint32_t Cmp_Shellcode_Size = 5;
 	constexpr static std::uint32_t Mov_Eax_Shellcode_Size = 5;
 	constexpr static std::uint32_t RetN_Shellcode_Size = 3;
-
-	constexpr static std::uint8_t Nt_Query_Information_Process_Args = 5;
-	constexpr static std::uint8_t Nt_Query_Ret_Value = 0x1;
 
 	constexpr static std::uint32_t Not_Return = 0xBEEEEEEF;
 };
