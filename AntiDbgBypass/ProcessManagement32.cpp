@@ -166,3 +166,21 @@ std::optional<std::uint32_t> ProcessManagement32::injectData(std::vector<std::ui
 bool ProcessManagement32::freeMemory(std::uint32_t address) {
 	return m_processManagement.freeMemory(address);
 }
+
+std::vector<std::pair<std::uint32_t,std::uint32_t>> ProcessManagement32::getBasicBlocks() {
+	std::vector<std::pair<std::uint32_t, std::uint32_t>> regions{};
+	
+	auto peb32 = this->getPEB32();
+	if(!peb32) {
+		return regions;
+	}
+
+	auto heapBase = peb32->ProcessHeap;
+	std::uint32_t protectedHeap{};
+	m_vmm.getVar(protectedHeap, heapBase + 0x24);
+
+	std::uint32_t protectedHeap2{};
+	m_vmm.getVar(protectedHeap2, protectedHeap);
+
+	return regions;
+}

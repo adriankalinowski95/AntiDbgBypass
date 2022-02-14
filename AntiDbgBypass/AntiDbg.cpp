@@ -5,6 +5,7 @@
 #include "ProcessHeapFlags32.h"
 #include "CheckRemoteDebuggerPresent32.h"
 #include "NtQueryInformationProcess32.h"
+#include "Heap32.h"
 
 #include <cstddef>
 
@@ -19,6 +20,7 @@ bool AntiDbg::bypassAll() {
 	auto globalFlagClear32Bypass = GlobalFlagsClear32(m_processManagement32).bypass();
 	auto processHeap32Bypass = ProcessHeapFlags32(m_processManagement32).bypass();
 	auto ntQueryInformationProcess32Bypass = NtQueryInformationProcess32(m_processManagement32).bypass();
+	auto heap32Bypass = Heap32(m_processManagement32).bypass();
 
 	return true;
 }

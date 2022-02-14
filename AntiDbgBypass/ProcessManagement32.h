@@ -23,6 +23,7 @@ public:
 	std::optional<FARPROC> getRemoteProcAddress(HMODULE hModule, LPCSTR lpProcName, UINT Ordinal, BOOL UseOrdinal);
 	std::optional<std::uint32_t> injectData(std::vector<std::uint8_t>& data);
 	bool freeMemory(std::uint32_t address);
+	std::vector<std::pair<std::uint32_t, std::uint32_t>> getBasicBlocks();
 
 private:
 	ProcessManagement<std::uint32_t>& m_processManagement;

@@ -78,6 +78,9 @@
     <ClCompile Include="ShellcodeGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Heap32.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="ShellcodeGenerator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Heap32.h">
+      <Filter>Header Files\bypass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
