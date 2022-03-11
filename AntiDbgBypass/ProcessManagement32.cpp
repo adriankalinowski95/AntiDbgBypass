@@ -168,8 +168,9 @@ bool ProcessManagement32::freeMemory(std::uint32_t address) {
 }
 
 std::vector<std::pair<std::uint32_t,std::uint32_t>> ProcessManagement32::getBasicBlocks() {
-	std::vector<std::pair<std::uint32_t, std::uint32_t>> regions{};
 	
+	std::vector<std::pair<std::uint32_t, std::uint32_t>> regions{};
+	/*
 	auto peb32 = this->getPEB32();
 	if(!peb32) {
 		return regions;
@@ -181,6 +182,62 @@ std::vector<std::pair<std::uint32_t,std::uint32_t>> ProcessManagement32::getBasi
 
 	std::uint32_t protectedHeap2{};
 	m_vmm.getVar(protectedHeap2, protectedHeap);
+	*/
+
+	unsigned char* p = NULL;
+	MEMORY_BASIC_INFORMATION info;
+	unsigned long usage = 0;
+	for(p = NULL;
+		VirtualQueryEx(*this->m_processManagement.getProcessHandle(), p, &info, sizeof(info)) == sizeof(info);
+		p += info.RegionSize) {
+		printf("%#10.10x (%6uK)\t", info.BaseAddress, info.RegionSize / 1024);
+
+		switch(info.State) {
+			case MEM_COMMIT:
+			printf("Committed");
+			break;
+			case MEM_RESERVE:
+			printf("Reserved");
+			break;
+			case MEM_FREE:
+			printf("Free");
+			break;
+		}
+		printf("\t");
+		switch(info.Type) {
+			case MEM_IMAGE:
+			printf("Code Module");
+			break;
+			case MEM_MAPPED:
+			printf("Mapped     ");
+			break;
+			case MEM_PRIVATE:
+			printf("Private    ");
+		}
+		printf("\t");
+
+		if(( info.State == MEM_COMMIT ) && ( info.Type == MEM_PRIVATE ))
+			usage += info.RegionSize;
+
+		int guard = 0, nocache = 0;
+
+		if(info.AllocationProtect & PAGE_NOCACHE)
+			nocache = 1;
+		if(info.AllocationProtect & PAGE_GUARD)
+			guard = 1;
+
+		info.AllocationProtect &= ~( PAGE_GUARD | PAGE_NOCACHE );
+
+		if(info.AllocationProtect == PAGE_READONLY || info.AllocationProtect == PAGE_READWRITE || info.AllocationProtect == PAGE_EXECUTE_READ || info.AllocationProtect == PAGE_EXECUTE_READWRITE) 			{
+
+		}
+
+		if(guard)
+			printf("\tguard page");
+		if(nocache)
+			printf("\tnon-cachable");
+		printf("\n");
+	}
 
 	return regions;
 }
