@@ -153,6 +153,7 @@
     <ClCompile Include="CheckRemoteDebuggerPresent32.cpp" />
     <ClCompile Include="GlobalFlagsClear32.cpp" />
     <ClCompile Include="Heap32.cpp" />
+    <ClCompile Include="HeapManagement32.cpp" />
     <ClCompile Include="Hook32.cpp" />
     <ClCompile Include="hooklib.cpp" />
     <ClCompile Include="NtGlobalFlag32.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="CheckRemoteDebuggerPresent32.h" />
     <ClInclude Include="GlobalFlagsClear32.h" />
     <ClInclude Include="Heap32.h" />
+    <ClInclude Include="HeapManagement32.h" />
     <ClInclude Include="Hook32.h" />
     <ClInclude Include="hooklib.hpp" />
     <ClInclude Include="ntddk.h" />

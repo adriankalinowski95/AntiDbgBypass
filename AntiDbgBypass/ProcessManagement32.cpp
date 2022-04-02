@@ -167,77 +167,68 @@ bool ProcessManagement32::freeMemory(std::uint32_t address) {
 	return m_processManagement.freeMemory(address);
 }
 
-std::vector<std::pair<std::uint32_t,std::uint32_t>> ProcessManagement32::getBasicBlocks() {
-	
-	std::vector<std::pair<std::uint32_t, std::uint32_t>> regions{};
-	/*
-	auto peb32 = this->getPEB32();
+std::vector<HEAP32> ProcessManagement32::getHeaps() {
+	std::vector<HEAP32> heaps{};
+	const auto peb32 = this->getPEB32();
 	if(!peb32) {
-		return regions;
+		return heaps;
 	}
 
-	auto heapBase = peb32->ProcessHeap;
-	std::uint32_t protectedHeap{};
-	m_vmm.getVar(protectedHeap, heapBase + 0x24);
-
-	std::uint32_t protectedHeap2{};
-	m_vmm.getVar(protectedHeap2, protectedHeap);
-	*/
-
-	unsigned char* p = NULL;
-	MEMORY_BASIC_INFORMATION info;
-	unsigned long usage = 0;
-	for(p = NULL;
-		VirtualQueryEx(*this->m_processManagement.getProcessHandle(), p, &info, sizeof(info)) == sizeof(info);
-		p += info.RegionSize) {
-		printf("%#10.10x (%6uK)\t", info.BaseAddress, info.RegionSize / 1024);
-
-		switch(info.State) {
-			case MEM_COMMIT:
-			printf("Committed");
-			break;
-			case MEM_RESERVE:
-			printf("Reserved");
-			break;
-			case MEM_FREE:
-			printf("Free");
-			break;
-		}
-		printf("\t");
-		switch(info.Type) {
-			case MEM_IMAGE:
-			printf("Code Module");
-			break;
-			case MEM_MAPPED:
-			printf("Mapped     ");
-			break;
-			case MEM_PRIVATE:
-			printf("Private    ");
-		}
-		printf("\t");
-
-		if(( info.State == MEM_COMMIT ) && ( info.Type == MEM_PRIVATE ))
-			usage += info.RegionSize;
-
-		int guard = 0, nocache = 0;
-
-		if(info.AllocationProtect & PAGE_NOCACHE)
-			nocache = 1;
-		if(info.AllocationProtect & PAGE_GUARD)
-			guard = 1;
-
-		info.AllocationProtect &= ~( PAGE_GUARD | PAGE_NOCACHE );
-
-		if(info.AllocationProtect == PAGE_READONLY || info.AllocationProtect == PAGE_READWRITE || info.AllocationProtect == PAGE_EXECUTE_READ || info.AllocationProtect == PAGE_EXECUTE_READWRITE) 			{
-
+	const auto heapsVa = peb32->ProcessHeaps;
+	const auto heapsCount = peb32->NumberOfHeaps;
+	const auto alignmentHeapsCount = min(heapsCount, Max_Heaps_Count);
+	
+	for(auto i = 0u; i < Max_Heaps_Count; i++) {
+		std::uint32_t heapVa{};
+		if (!m_vmm.getVar(heapVa, heapsVa + sizeof(std::uint32_t) * i)) {
+			return heaps;
 		}
 
-		if(guard)
-			printf("\tguard page");
-		if(nocache)
-			printf("\tnon-cachable");
-		printf("\n");
+		HEAP32 heap32{};
+		if(!m_vmm.getVar(heap32, heapVa)) {
+			return heaps;
+		}
+
+		heaps.push_back(heap32);
 	}
 
-	return regions;
+	return heaps;
+}
+
+std::vector<ProcessManagement32::HeapBlock32> ProcessManagement32::getHeapBlocks(HEAP32& heap) {
+	std::vector<HeapBlock32> heapBlocks{};
+	const auto encoding32Ptr = (std::uint32_t* )( &( heap.Encoding ));
+	const auto encoding1 = *encoding32Ptr;
+	const auto encoding2 = *(encoding32Ptr + 1);
+
+	auto currentEntryVa = heap.FirstEntry;
+	for(auto i = 0u; i < Max_Heap_Blocks_Count; i++) {
+		if(currentEntryVa == heap.LastValidEntry) {
+			return heapBlocks;
+		}
+
+		HEAP_UNPACKED_PACKET_32 encodedEntry{};
+		if(!m_vmm.getVar(encodedEntry, currentEntryVa)) {
+			return heapBlocks;
+		}
+
+		const auto encoded32Ptr = ( std::uint32_t* )( &(encodedEntry));
+		const auto encodedEntry1 = *encoded32Ptr;
+		const auto encodedEntry2 = *(encoded32Ptr + 1);
+
+		std::uint32_t decodedEntry[2]{};
+		decodedEntry[0] = encoding1 ^ encodedEntry1;
+		decodedEntry[1] = encoding2 ^ encodedEntry2;
+
+		auto decodedEntryVal = *( (HEAP_UNPACKED_PACKET_32*)( decodedEntry ) );
+		decodedEntryVal.Size *= Heap_Block_Granulation;
+		decodedEntryVal.PreviousSize *= Heap_Block_Granulation;
+
+		HeapBlock32 heapBlock32{currentEntryVa, decodedEntryVal};
+		heapBlocks.push_back(heapBlock32);
+
+		currentEntryVa += decodedEntryVal.Size;
+	}
+
+	return heapBlocks;
 }

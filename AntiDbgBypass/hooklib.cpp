@@ -14,7 +14,7 @@ char * GetTime( )
 	std::tm out = { 0 };
 	auto local_now = localtime_s( &out, &now );
 
-	char * out_str = new char[ 100 ]( );
+	char * out_str = new char[ 100 ]( ); 
 	sprintf_s( out_str, 100, "%02d:%02d:%02d", out.tm_hour, out.tm_min, out.tm_sec );
 	return out_str;
 }
