@@ -84,6 +84,9 @@
     <ClCompile Include="HeapManagement32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vmm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files\bypass</Filter>
     </ClInclude>
     <ClInclude Include="HeapManagement32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vmm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

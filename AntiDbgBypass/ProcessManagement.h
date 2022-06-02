@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <optional>
 #include <Windows.h>
+#include "peb.h"
 
 template<typename T>
 class ProcessManagement {
@@ -38,6 +39,45 @@ public:
 	std::optional<HANDLE> getProcessHandle() {
 		return m_processHandle;
 	}
+
+	std::optional<PROCESS_BASIC_INFORMATION> getPBI() {
+		BOOL isWow64 = FALSE;
+		if(!IsWow64Process(m_processManagement.getProcessHandle().value(), &isWow64)) {
+			std::nullopt;
+		}
+
+		if(!isWow64) {
+			return std::nullopt;
+		}
+
+		PROCESS_BASIC_INFORMATION pbi;
+		if(NtQueryInformationProcess(m_processManagement.getProcessHandle().value(), ProcessBasicInformation, &pbi, sizeof(PROCESS_BASIC_INFORMATION), NULL) != 0) {
+			return std::nullopt;
+		}
+
+		return pbi;
+	}
+
+	/*
+	std::optional<> getPEB() {
+		if(!m_processManagement.getProcessHandle()) {
+			return std::nullopt;
+		}
+
+		auto pbi = getPBI();
+		if(!pbi) {
+			return std::nullopt;
+		}
+
+		PEB32 peb{};
+		const auto readedMemory = m_processManagement.readMemory(getPEB32FromPBI(*pbi), reinterpret_cast<std::uint8_t*>( &peb ), sizeof(peb));
+		if(!readedMemory || readedMemory != sizeof(peb)) {
+			return std::nullopt;
+		}
+
+		return peb;
+	}
+	*/
 
 	static constexpr std::uint32_t Page_Size = 0x1000;
 protected:

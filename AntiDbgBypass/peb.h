@@ -273,3 +273,4 @@ struct _HEAP_T {
 };
 
 typedef _HEAP_T<DWORD> HEAP32;
+typedef _HEAP_T<DWORD64> HEAP64;

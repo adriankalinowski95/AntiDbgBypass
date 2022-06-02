@@ -1,18 +1,15 @@
 #include "Heap32.h"
 #include <iostream>
 
+// Rozkminic jak pisaæ kod, w taki spoósb aby dzia³a³ zarówno dla x86 i wow64
 Heap32::Heap32(ProcessManagement32& processManagement):BaseBypass32(processManagement) {}
 
 bool Heap32::bypass() {	
-	auto allSignaturesVec = getAntiDbgSignatures();
-	if (allSignaturesVec.empty()) {
-		return false;
-	}
-
-	return overwriteSignatures(allSignaturesVec);
+	return bypassX86() & bypassWowX64();
 }
 
 std::vector<std::uint32_t> Heap32::getSignaturesFromHeap(HEAP32& heap, std::uint32_t signature) {
+	// Mo¿e  byætemplatowe
 	const auto heapBlocks = m_processManagement.getHeapBlocks(heap);
 	if(heapBlocks.empty()) {
 		return std::vector<std::uint32_t>();
@@ -20,6 +17,7 @@ std::vector<std::uint32_t> Heap32::getSignaturesFromHeap(HEAP32& heap, std::uint
 
 	std::vector<std::uint32_t> signatures{};
 	for(auto& heapBlock : heapBlocks) {
+		// mo¿e byætemplatowe
 		auto siganturesFromBlock = getSignaturesFromBlock(heapBlock, signature);
 		if(!siganturesFromBlock.empty()) {
 			signatures.insert(end(signatures), begin(siganturesFromBlock), end(siganturesFromBlock));
@@ -31,12 +29,14 @@ std::vector<std::uint32_t> Heap32::getSignaturesFromHeap(HEAP32& heap, std::uint
 
 std::vector<std::uint32_t> Heap32::getAntiDbgSignatures() {
 	std::vector<std::uint32_t> signatures{};
+
 	auto heaps = m_processManagement.getHeaps();
 	if(heaps.empty()) {
 		return signatures;
 	}
 
 	for(auto& heap : heaps) {
+		// mozna zast¹pic
 		const auto heapBlocks = m_processManagement.getHeapBlocks(heap);
 		if(heapBlocks.empty()) {
 			std::cout << "Heap without blocks ! " << std::endl;
@@ -46,7 +46,53 @@ std::vector<std::uint32_t> Heap32::getAntiDbgSignatures() {
 		std::vector<std::uint32_t> heapBlockSignatures{};
 
 		for(auto& heapBlock: heapBlocks) {
-			auto siganturesFromBlock = getSignaturesFromBlock(heapBlock, AntiDbg_Signature);
+			auto siganturesFromBlock = getSignaturesFromBlock(heapBlock, AntiDbg_Signature_1);
+			if(!siganturesFromBlock.empty()) {
+				heapBlockSignatures.insert(end(heapBlockSignatures), begin(siganturesFromBlock), end(siganturesFromBlock));
+			}
+		}
+
+		for(auto& heapBlock : heapBlocks) {
+			auto siganturesFromBlock = getSignaturesFromBlock(heapBlock, AntiDbg_Signature_2);
+			if(!siganturesFromBlock.empty()) {
+				heapBlockSignatures.insert(end(heapBlockSignatures), begin(siganturesFromBlock), end(siganturesFromBlock));
+			}
+		}
+
+		std::cout << "Heap: " << std::hex << heap.BaseAddress << " signatures count: " << std::dec << heapBlockSignatures.size() << std::endl;
+		std::cout << "Blocks count: " << heapBlocks.size() << std::endl;
+	}
+
+	return signatures;
+}
+
+std::vector<std::uint32_t> Heap32::getAntiDbgSignaturesWow64() {
+	std::vector<std::uint32_t> signatures{};
+
+	auto heaps = m_processManagement.getHeaps();
+	if(heaps.empty()) {
+		return signatures;
+	}
+
+	for(auto& heap : heaps) {
+		// mozna zast¹pic
+		const auto heapBlocks = m_processManagement.getHeapBlocks(heap);
+		if(heapBlocks.empty()) {
+			std::cout << "Heap without blocks ! " << std::endl;
+
+			continue;
+		}
+		std::vector<std::uint32_t> heapBlockSignatures{};
+
+		for(auto& heapBlock : heapBlocks) {
+			auto siganturesFromBlock = getSignaturesFromBlock(heapBlock, AntiDbg_Signature_1);
+			if(!siganturesFromBlock.empty()) {
+				heapBlockSignatures.insert(end(heapBlockSignatures), begin(siganturesFromBlock), end(siganturesFromBlock));
+			}
+		}
+
+		for(auto& heapBlock : heapBlocks) {
+			auto siganturesFromBlock = getSignaturesFromBlock(heapBlock, AntiDbg_Signature_2);
 			if(!siganturesFromBlock.empty()) {
 				heapBlockSignatures.insert(end(heapBlockSignatures), begin(siganturesFromBlock), end(siganturesFromBlock));
 			}
@@ -94,4 +140,18 @@ bool Heap32::overwriteSignatures(std::vector<std::uint32_t>& signatures) {
 	}
 
 	return true;
+}
+
+bool Heap32::bypassX86() {
+	auto allSignaturesVec = getAntiDbgSignatures();
+	if(allSignaturesVec.empty()) {
+		return false;
+	}
+
+	return overwriteSignatures(allSignaturesVec);
+}
+
+bool Heap32::bypassWowX64() {
+	auto allSignaturesVec = getAntiDbgSignatures();
+	return false;
 }

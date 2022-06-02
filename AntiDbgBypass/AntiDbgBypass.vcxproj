@@ -166,6 +166,7 @@
     <ClCompile Include="RemoteOps.cpp" />
     <ClCompile Include="ShellcodeGenerator.cpp" />
     <ClCompile Include="ThreadLocalStorage.cpp" />
+    <ClCompile Include="Vmm.cpp" />
     <ClCompile Include="Vmm32.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +192,7 @@
     <ClInclude Include="RemoteOps.h" />
     <ClInclude Include="ShellcodeGenerator.h" />
     <ClInclude Include="ThreadLocalStorage.h" />
+    <ClInclude Include="Vmm.h" />
     <ClInclude Include="Vmm32.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
