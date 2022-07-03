@@ -3,13 +3,10 @@
 ProcessHeapFlags32::ProcessHeapFlags32(ProcessManagement32& processManegement32): BaseBypass32(processManegement32) {}
 
 bool ProcessHeapFlags32::bypass() {
-	auto peb32 = m_processManagement.getPEB32();
-	auto peb64 = m_processManagement.getPEB64();
-
-	if(!peb32 || !peb64) {
+	auto peb32 = m_processManagement.getStructures().getPEB32();
+	if(!peb32) {
 		return false;
 	}
-
 
 	if(isFlagsOn32(*peb32)) {
 		if(!bypassFlags32(*peb32)) {
@@ -19,18 +16,6 @@ bool ProcessHeapFlags32::bypass() {
 
 	if(isForceFlagsOn32(*peb32)) {
 		if(!bypassForceFlags32(*peb32)) {
-			return false;
-		}
-	}
-
-	if(isFlagsOn64(*peb64)) {
-		if(!bypassFlags64(*peb64)) {
-			return false;
-		}
-	}
-
-	if(isForceFlagsOn64(*peb64)) {
-		if(!bypassForceFlags64(*peb64)) {
 			return false;
 		}
 	}
@@ -50,18 +35,6 @@ bool ProcessHeapFlags32::isFlagsOn32(PEB32& peb) {
 	return heapFlagValue & ~HEAP_GROWABLE;
 }
 
-bool ProcessHeapFlags32::isFlagsOn64(PEB64& peb) {
-	auto heapVa = peb.ProcessHeap;
-	auto heapFlagVa = heapVa + getHeapFlagsOffset(true);
-
-	std::uint64_t heapFlagValue{};
-	if(!m_processManagement.getVmm().getVar(heapFlagValue, heapFlagVa)) {
-		return false;
-	}
-
-	return heapFlagValue & ~HEAP_GROWABLE;
-}
-
 bool ProcessHeapFlags32::isForceFlagsOn32(PEB32& peb) {
 	auto heapVa = peb.ProcessHeap;
 	auto heapForceFlagVa = heapVa + getHeapForceFlagsOffset(false);
@@ -74,18 +47,6 @@ bool ProcessHeapFlags32::isForceFlagsOn32(PEB32& peb) {
 	return heapForceFlagValue  != 0;
 }
 
-bool ProcessHeapFlags32::isForceFlagsOn64(PEB64& peb) {
-	auto heapVa = peb.ProcessHeap;
-	auto heapForceFlagVa = heapVa + getHeapForceFlagsOffset(true);
-
-	std::uint32_t heapForceFlagValue{};
-	if(!m_processManagement.getVmm().getVar(heapForceFlagValue, heapForceFlagVa)) {
-		return false;
-	}
-
-	return heapForceFlagValue != 0;
-}
-
 bool ProcessHeapFlags32::bypassFlags32(PEB32& peb) {
 	auto heapVa = peb.ProcessHeap;
 	auto heapFlagVa = heapVa + getHeapFlagsOffset(false);
@@ -94,27 +55,11 @@ bool ProcessHeapFlags32::bypassFlags32(PEB32& peb) {
 	return m_processManagement.getVmm().putVar(heapFlagValue, heapFlagVa);
 }
 
-bool ProcessHeapFlags32::bypassFlags64(PEB64& peb) {
-	auto heapVa = peb.ProcessHeap;
-	auto heapFlagVa = heapVa + getHeapFlagsOffset(true);
-
-	std::uint64_t heapFlagValue{};
-	return m_processManagement.getVmm().putVar(heapFlagValue, heapFlagVa);
-}
-
 bool ProcessHeapFlags32::bypassForceFlags32(PEB32& peb) {
 	auto heapVa = peb.ProcessHeap;
 	auto heapForceFlagVa = heapVa + getHeapForceFlagsOffset(false);
 
 	std::uint32_t heapForceFlagValue{};
-	return m_processManagement.getVmm().putVar(heapForceFlagValue, heapForceFlagVa);
-}
-
-bool ProcessHeapFlags32::bypassForceFlags64(PEB64& peb) {
-	auto heapVa = peb.ProcessHeap;
-	auto heapForceFlagVa = heapVa + getHeapForceFlagsOffset(true);
-
-	std::uint64_t heapForceFlagValue{};
 	return m_processManagement.getVmm().putVar(heapForceFlagValue, heapForceFlagVa);
 }
 

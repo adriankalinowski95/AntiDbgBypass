@@ -130,12 +130,12 @@ std::optional<Hook32::Shellcode> Hook32::getDetourWithRet(std::uint32_t hookFunc
 }
 
 bool Hook32::overwriteFunction(std::string dllName, std::string funName, std::vector<std::uint8_t>& newFun, std::uint8_t paramsCount) {
-	auto moduleHandle = m_processManagement32.getRemoteModuleHandle(dllName.c_str());
+	auto moduleHandle = m_processManagement32.getStructures().getRemoteModuleHandle(dllName.c_str());
 	if(!moduleHandle) {
 		return false;
 	}
 
-	auto procVa = m_processManagement32.getRemoteProcAddress(*moduleHandle, funName.c_str(), 0, 0);
+	auto procVa = m_processManagement32.getStructures().getRemoteProcAddress(*moduleHandle, funName.c_str(), 0, 0);
 	if(!procVa) {
 		return false;
 	}

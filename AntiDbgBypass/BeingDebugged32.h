@@ -8,8 +8,6 @@ public:
 
 private:
 	bool isBeingDebugged32();
-	bool isBeingDebugged64();
 	bool bypassBeingDebugged32();
-	bool bypassBeingDebugged64();
 };
 

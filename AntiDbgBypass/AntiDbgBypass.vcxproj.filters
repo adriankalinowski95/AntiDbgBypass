@@ -19,27 +19,33 @@
     <Filter Include="Header Files\bypass">
       <UniqueIdentifier>{37752be7-4367-4189-83b2-137e18b85729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\process_strucutres">
+      <UniqueIdentifier>{4218dc30-4246-45e5-a3bf-0ade6bede3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\process_strucutres">
+      <UniqueIdentifier>{289acf40-04b8-4970-9bf1-fffce6c98b6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\process_management">
+      <UniqueIdentifier>{48543a40-4c3f-49d6-883f-f82322ba6bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\process_management">
+      <UniqueIdentifier>{24f75b87-ffcc-4b53-9c8f-87232f73bff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\vmm">
+      <UniqueIdentifier>{2bd5cf71-dfbb-4bed-8de7-0c57e98dc451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\loader">
+      <UniqueIdentifier>{9e80b5df-e0a0-4522-98b5-8bae11eb52b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\loader">
+      <UniqueIdentifier>{a3414e09-b845-4db7-93de-5ca1f309561b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AntiDbgBypass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AntiDbg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessManagement32.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessManagement64.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessManagementUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessManagementUM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vmm32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NtGlobalFlag32.cpp">
@@ -87,33 +93,42 @@
     <ClCompile Include="Vmm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ProcessStructures32Wow64UM.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessStructures32K.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessStructures32UM.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessStructures32Wow64K.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessStructures32Base.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessManagementUtils.cpp">
+      <Filter>Source Files\process_management</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessManagement32.cpp">
+      <Filter>Source Files\process_management</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessManagement64.cpp">
+      <Filter>Source Files\process_management</Filter>
+    </ClCompile>
+    <ClCompile Include="LoaderUM.cpp">
+      <Filter>Source Files\loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProcessManagement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProcessManagement32.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProcessManagement64.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProcessManagementUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ntddk.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProcessManagementUM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="peb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vmm32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NtGlobalFlag32.h">
@@ -158,8 +173,47 @@
     <ClInclude Include="HeapManagement32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vmm.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ProcessStructures32Wow64UM.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessStructures32Base.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessStructures32K.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessStructures32UM.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessStructures32Wow64K.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessManagement.h">
+      <Filter>Header Files\process_management</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessManagement32.h">
+      <Filter>Header Files\process_management</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessManagement64.h">
+      <Filter>Header Files\process_management</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessManagementUtils.h">
+      <Filter>Header Files\process_management</Filter>
+    </ClInclude>
+    <ClInclude Include="Vmm32UM.h">
+      <Filter>Header Files\vmm</Filter>
+    </ClInclude>
+    <ClInclude Include="VmmBase.h">
+      <Filter>Header Files\vmm</Filter>
+    </ClInclude>
+    <ClInclude Include="VmmUM.h">
+      <Filter>Header Files\vmm</Filter>
+    </ClInclude>
+    <ClInclude Include="LoaderUM.h">
+      <Filter>Header Files\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="LoaderBase.h">
+      <Filter>Header Files\loader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

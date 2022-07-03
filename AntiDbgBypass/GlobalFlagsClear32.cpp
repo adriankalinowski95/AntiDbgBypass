@@ -13,7 +13,7 @@ bool GlobalFlagsClear32::bypass() {
 }
 
 bool GlobalFlagsClear32::isGlobalFlagsClearInProcess() {
-	auto loadConfigDirectory = m_processManagement.getImageLoadConfigDirectory();
+	auto loadConfigDirectory = m_processManagement.getStructures().getImageLoadConfigDirectory();
 	if(!loadConfigDirectory) {
 		return false;
 	}
@@ -26,7 +26,7 @@ bool GlobalFlagsClear32::isGlobalFlagsClearInProcess() {
 }
 
 bool GlobalFlagsClear32::bypassGlobalFlagsClearInProcess() {
-	auto loadConfigDirectory = m_processManagement.getImageLoadConfigDirectory();
+	auto loadConfigDirectory = m_processManagement.getStructures().getImageLoadConfigDirectory();
 	if(!loadConfigDirectory) {
 		return false;
 	}

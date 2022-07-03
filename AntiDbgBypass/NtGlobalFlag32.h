@@ -8,9 +8,7 @@ public:
 
 private:
 	bool isNtGlobalFlag32();
-	bool isNtGlobalFlag64();
 	bool bypassNtGlobalFlag32();
-	bool bypassNtGlobalFlag64();
 
 	static constexpr std::uint32_t FLG_HEAP_ENABLE_TAIL_CHECK = 0x10;
 	static constexpr std::uint32_t FLG_HEAP_ENABLE_FREE_CHECK = 0x20;

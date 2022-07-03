@@ -2,15 +2,14 @@
 //
 
 #include <iostream>
-#include "ProcessManagementUM.h"
 #include "ProcessManagement32.h"
 #include "ProcessManagementUtils.h"
 
 #include "AntiDbg.h"
 // al-khaser.exe
 // constexpr static const char Process_Name[] = "HookTest.exe";
-// constexpr static const char Process_Name[] = "al-khaser.exe";
- constexpr static const char Process_Name[] = "TheHEap.exe";
+ constexpr static const char Process_Name[] = "al-khaser.exe";
+ // constexpr static const char Process_Name[] = "TheHEap.exe";
 int main()
 {
     AntiDbg antiDbg(Process_Name);

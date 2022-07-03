@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -156,18 +156,22 @@
     <ClCompile Include="HeapManagement32.cpp" />
     <ClCompile Include="Hook32.cpp" />
     <ClCompile Include="hooklib.cpp" />
+    <ClCompile Include="LoaderUM.cpp" />
     <ClCompile Include="NtGlobalFlag32.cpp" />
     <ClCompile Include="NtQueryInformationProcess32.cpp" />
     <ClCompile Include="ProcessHeapFlags32.cpp" />
     <ClCompile Include="ProcessManagement32.cpp" />
     <ClCompile Include="ProcessManagement64.cpp" />
-    <ClCompile Include="ProcessManagementUM.cpp" />
     <ClCompile Include="ProcessManagementUtils.cpp" />
+    <ClCompile Include="ProcessStructures32Base.cpp" />
+    <ClCompile Include="ProcessStructures32K.cpp" />
+    <ClCompile Include="ProcessStructures32UM.cpp" />
+    <ClCompile Include="ProcessStructures32Wow64K.cpp" />
+    <ClCompile Include="ProcessStructures32Wow64UM.cpp" />
     <ClCompile Include="RemoteOps.cpp" />
     <ClCompile Include="ShellcodeGenerator.cpp" />
     <ClCompile Include="ThreadLocalStorage.cpp" />
     <ClCompile Include="Vmm.cpp" />
-    <ClCompile Include="Vmm32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
@@ -179,6 +183,14 @@
     <ClInclude Include="HeapManagement32.h" />
     <ClInclude Include="Hook32.h" />
     <ClInclude Include="hooklib.hpp" />
+    <ClInclude Include="LoaderBase.h" />
+    <ClInclude Include="LoaderUM.h" />
+    <ClInclude Include="ProcessStructures32Base.h" />
+    <ClInclude Include="ProcessStructures32K.h" />
+    <ClInclude Include="ProcessStructures32UM.h" />
+    <ClInclude Include="ProcessStructures32Wow64K.h" />
+    <ClInclude Include="ProcessStructures32Wow64UM.h" />
+    <ClInclude Include="VmmBase.h" />
     <ClInclude Include="ntddk.h" />
     <ClInclude Include="NtGlobalFlag32.h" />
     <ClInclude Include="NtQueryInformationProcess32.h" />
@@ -188,12 +200,11 @@
     <ClInclude Include="ProcessManagement32.h" />
     <ClInclude Include="ProcessManagement64.h" />
     <ClInclude Include="ProcessManagementUtils.h" />
-    <ClInclude Include="ProcessManagementUM.h" />
     <ClInclude Include="RemoteOps.h" />
     <ClInclude Include="ShellcodeGenerator.h" />
     <ClInclude Include="ThreadLocalStorage.h" />
-    <ClInclude Include="Vmm.h" />
-    <ClInclude Include="Vmm32.h" />
+    <ClInclude Include="Vmm32UM.h" />
+    <ClInclude Include="VmmUM.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

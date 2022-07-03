@@ -10,17 +10,30 @@
 #include <cstddef>
 
 AntiDbg::AntiDbg(std::string processName):
-	m_rocessManagementUM{ processName },
-	m_processManagement32{ m_rocessManagementUM } {
-	}
+	m_processName{ processName },
+	m_loaderUM{ processName },
+	m_vmm32UM{ m_loaderUM },
+	m_processStructures32UM{ m_vmm32UM },
+	m_processStructures32Wow64UM{ m_vmm32UM },
+	m_processManagement32{ m_vmm32UM, m_processStructures32UM },
+	m_processManagement32Wow64{ m_vmm32UM, m_processStructures32UM }{}
 
 bool AntiDbg::bypassAll() {
 	auto isNtGlobalFlag32Bypass = NtGlobalFlag32(m_processManagement32).bypass();
+	auto isNtGlobalFlag32Wow64Bypass = NtGlobalFlag32(m_processManagement32Wow64).bypass();
+	
 	auto beingDebugged32Bypass = BeingDebugged32(m_processManagement32).bypass();
+	auto beingDebugged32Wow64Bypass = BeingDebugged32(m_processManagement32Wow64).bypass();
+
 	auto globalFlagClear32Bypass = GlobalFlagsClear32(m_processManagement32).bypass();
+
 	auto processHeap32Bypass = ProcessHeapFlags32(m_processManagement32).bypass();
+	auto processHeap32Wow64Bypass = ProcessHeapFlags32(m_processManagement32Wow64).bypass();
+
 	auto ntQueryInformationProcess32Bypass = NtQueryInformationProcess32(m_processManagement32).bypass();
-	auto heap32Bypass = Heap32(m_processManagement32).bypass();
+
+	// auto heap32Bypass = Heap32(m_processManagement32).bypass();
+	// auto heap32Wow64Bypass = Heap32(m_processManagement32Wow64).bypass();
 
 	return true;
 }
