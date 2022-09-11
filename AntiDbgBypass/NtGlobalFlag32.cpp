@@ -15,25 +15,25 @@ bool NtGlobalFlag32::bypass() {
 }
 
 bool NtGlobalFlag32::isNtGlobalFlag32() {
-	auto peb = m_processManagement.getStructures().getPEB32();
+	auto peb = m_processManagement.getStructures().getPEB();
 	if(!peb) {
 		return false;
 	}
 
-	return peb->NtGlobalFlag & NT_GLOBAL_FLAG_DEBUGGED;
+	return peb->getNtGlobalFlag() & NT_GLOBAL_FLAG_DEBUGGED;
 }
 
 bool NtGlobalFlag32::bypassNtGlobalFlag32() {
-	auto peb = m_processManagement.getStructures().getPEB32();
-	auto pebVa = m_processManagement.getStructures().getPEB32Va();
+	auto peb = m_processManagement.getStructures().getPEB();
+	auto pebVa = m_processManagement.getStructures().getPEBVa();
 	if(!peb || !pebVa) {
 		return false;
 	}
 
-	auto currFlag = peb->NtGlobalFlag;
+	auto currFlag = peb->getNtGlobalFlag();
 	currFlag &= ~NT_GLOBAL_FLAG_DEBUGGED;
 
-	auto flagAddress = *pebVa + offsetof(PEB32, NtGlobalFlag);
+	auto flagAddress = *pebVa + peb->getNtGlobalFlagOffset();
 
 	return m_processManagement.getVmm().putVar(currFlag, flagAddress);
 }

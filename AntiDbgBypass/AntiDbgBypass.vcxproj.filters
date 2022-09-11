@@ -120,6 +120,15 @@
     <ClCompile Include="LoaderUM.cpp">
       <Filter>Source Files\loader</Filter>
     </ClCompile>
+    <ClCompile Include="BasePEB.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="PEB32C.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
+    <ClCompile Include="PEB64C.cpp">
+      <Filter>Source Files\process_strucutres</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -214,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="LoaderBase.h">
       <Filter>Header Files\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="PEB64C.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="PEB32C.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="BasePEB.h">
+      <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

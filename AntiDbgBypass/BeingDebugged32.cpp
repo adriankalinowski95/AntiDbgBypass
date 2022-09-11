@@ -12,23 +12,23 @@ bool BeingDebugged32::bypass() {
 }
 
 bool BeingDebugged32::isBeingDebugged32() {
-	auto peb = m_processManagement.getStructures().getPEB32();
+	auto peb = m_processManagement.getStructures().getPEB();
 	if(!peb) {
 		return false;
 	}
 
-	return peb->BeingDebugged > 0;
+	return peb->getBeingDebugged() > 0;
 }
 
 
 bool BeingDebugged32::bypassBeingDebugged32() {
-	auto peb = m_processManagement.getStructures().getPEB32();
-	auto pebVa = m_processManagement.getStructures().getPEB32Va();
+	auto peb = m_processManagement.getStructures().getPEB();
+	auto pebVa = m_processManagement.getStructures().getPEBVa();
 	if(!peb || !pebVa) {
 		return false;
 	}
 
-	auto beingDebuggedVa = *pebVa + offsetof(PEB32, BeingDebugged);
+	auto beingDebuggedVa = *pebVa + peb->getBeingDebuggedOffset();
 	BYTE zeroStatus = 0;
 
 	return m_processManagement.getVmm().putVar(zeroStatus, beingDebuggedVa);

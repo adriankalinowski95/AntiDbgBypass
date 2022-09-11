@@ -149,6 +149,7 @@
     <ClCompile Include="AntiDbg.cpp" />
     <ClCompile Include="AntiDbgBypass.cpp" />
     <ClCompile Include="BaseBypass32.cpp" />
+    <ClCompile Include="BasePEB.cpp" />
     <ClCompile Include="BeingDebugged32.cpp" />
     <ClCompile Include="CheckRemoteDebuggerPresent32.cpp" />
     <ClCompile Include="GlobalFlagsClear32.cpp" />
@@ -159,6 +160,8 @@
     <ClCompile Include="LoaderUM.cpp" />
     <ClCompile Include="NtGlobalFlag32.cpp" />
     <ClCompile Include="NtQueryInformationProcess32.cpp" />
+    <ClCompile Include="PEB32C.cpp" />
+    <ClCompile Include="PEB64C.cpp" />
     <ClCompile Include="ProcessHeapFlags32.cpp" />
     <ClCompile Include="ProcessManagement32.cpp" />
     <ClCompile Include="ProcessManagement64.cpp" />
@@ -176,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
     <ClInclude Include="BaseBypass32.h" />
+    <ClInclude Include="PEBAbstraction.h" />
     <ClInclude Include="BeingDebugged32.h" />
     <ClInclude Include="CheckRemoteDebuggerPresent32.h" />
     <ClInclude Include="GlobalFlagsClear32.h" />
@@ -185,6 +189,9 @@
     <ClInclude Include="hooklib.hpp" />
     <ClInclude Include="LoaderBase.h" />
     <ClInclude Include="LoaderUM.h" />
+    <ClInclude Include="PEB32C.h" />
+    <ClInclude Include="PEB64C.h" />
+    <ClInclude Include="PEBBase.h" />
     <ClInclude Include="ProcessStructures32Base.h" />
     <ClInclude Include="ProcessStructures32K.h" />
     <ClInclude Include="ProcessStructures32UM.h" />

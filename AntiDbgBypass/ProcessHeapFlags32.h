@@ -7,10 +7,10 @@ public:
 	bool bypass();
 
 private:
-	bool isFlagsOn32(PEB32& peb);
-	bool isForceFlagsOn32(PEB32& peb);
-	bool bypassFlags32(PEB32& peb);
-	bool bypassForceFlags32(PEB32& peb);
+	bool isFlagsOn32(PEBAbstraction* peb);
+	bool isForceFlagsOn32(PEBAbstraction* peb);
+	bool bypassFlags32(PEBAbstraction* peb);
+	bool bypassForceFlags32(PEBAbstraction* peb);
 	int getHeapFlagsOffset(bool x64);
 	int getHeapForceFlagsOffset(bool x64);
 };

@@ -3,6 +3,15 @@
 #include "RemoteOps.h"
 #include <minwindef.h>
 
+PEBAbstraction* ProcessStructures32Base::getPEB() {
+	const auto pebVa = getPEBVa();
+	if(!pebVa) {
+		return nullptr;
+	}
+
+	return getPEBByVa(*pebVa);
+}
+
 std::optional<IMAGE_NT_HEADERS32> ProcessStructures32Base::getNtHeader() {
 	if(!m_vmm.getLoader().getProcessHandle()) {
 		return std::nullopt;
@@ -51,7 +60,31 @@ std::optional<PROCESS_BASIC_INFORMATION> ProcessStructures32Base::getPBI() {
 	return pbi;
 }
 
-std::optional<PEB32> ProcessStructures32Base::getPEB32ByVa(std::uint32_t va) {
+std::optional<THREAD_BASIC_INFORMATION> ProcessStructures32Base::getTBI() {
+	if(!m_vmm.getLoader().getProcessHandle()) {
+		return std::nullopt;
+	}
+
+	auto processHandle = m_vmm.getLoader().getProcessHandle().value();
+	BOOL isWow64 = FALSE;
+	if(!IsWow64Process(processHandle, &isWow64)) {
+		std::nullopt;
+	}
+
+	if(!isWow64) {
+		return std::nullopt;
+	}
+
+	THREAD_BASIC_INFORMATION tbi{};
+	if(NtQueryInformationThread(processHandle, ThreadBasicInformation, &tbi, sizeof(THREAD_BASIC_INFORMATION), NULL) != 0) {
+		return std::nullopt;
+	}
+
+	return tbi;
+}
+
+/*
+std::optional<PEB32> ProcessStructures32Base::getPEBByVa(std::uint32_t va) {
 	PEB32 peb{};
 	const auto readedMemory = m_vmm.getVar(peb, va);
 	if(!readedMemory) {
@@ -60,6 +93,7 @@ std::optional<PEB32> ProcessStructures32Base::getPEB32ByVa(std::uint32_t va) {
 	
 	return peb;
 }
+*/
 
 std::optional<ProcessStructures32Base::ImgLoadConfDir32_V> ProcessStructures32Base::getImageLoadConfigDirectory() {
 	if(!m_vmm.getLoader().getProcessHandle()) {
@@ -111,15 +145,16 @@ std::optional<FARPROC> ProcessStructures32Base::getRemoteProcAddress(HMODULE hMo
 	return RemoteOps::GetRemoteProcAddress(processHandle, hModule, lpProcName, Ordinal, UseOrdinal);
 }
 
+// @TODO We need create HEAP with abastraction!!!
 std::vector<HEAP32> ProcessStructures32Base::getHeaps() {
 	std::vector<HEAP32> heaps{};
-	const auto peb32 = this->getPEB32();
-	if(!peb32) {
+	const auto peb = this->getPEB();
+	if(!peb) {
 		return heaps;
 	}
 
-	const auto heapsVa = peb32->ProcessHeaps;
-	const auto heapsCount = peb32->NumberOfHeaps;
+	const auto heapsVa = peb->getProcessHeaps();
+	const auto heapsCount = peb->getNumberOfHeaps();
 	const auto alignmentHeapsCount = min(heapsCount, Max_Heaps_Count);
 
 	for(auto i = 0u; i < Max_Heaps_Count; i++) {
