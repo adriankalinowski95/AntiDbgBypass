@@ -8,7 +8,8 @@
 #include "AntiDbg.h"
 // al-khaser.exe
 // constexpr static const char Process_Name[] = "HookTest.exe";
- constexpr static const char Process_Name[] = "al-khaser.exe";
+ // constexpr static const char Process_Name[] = "al-khaser.exe";
+constexpr static const char Process_Name[] = "AntiDbg.exe";
  // constexpr static const char Process_Name[] = "TheHEap.exe";
 int main()
 {

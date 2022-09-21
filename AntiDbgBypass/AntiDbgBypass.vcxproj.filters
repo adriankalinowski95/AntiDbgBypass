@@ -129,6 +129,9 @@
     <ClCompile Include="PEB64C.cpp">
       <Filter>Source Files\process_strucutres</Filter>
     </ClCompile>
+    <ClCompile Include="Int3Bypass.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -230,7 +233,22 @@
     <ClInclude Include="PEB32C.h">
       <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
-    <ClInclude Include="BasePEB.h">
+    <ClInclude Include="PEBAbstraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PEBBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Int3Bypass.h">
+      <Filter>Header Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEntry32.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEntryAbstraction.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEntryBase.h">
       <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
   </ItemGroup>

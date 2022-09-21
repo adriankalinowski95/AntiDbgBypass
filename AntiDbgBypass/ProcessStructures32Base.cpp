@@ -12,6 +12,10 @@ PEBAbstraction* ProcessStructures32Base::getPEB() {
 	return getPEBByVa(*pebVa);
 }
 
+ModuleEntryAbstraction* ProcessStructures32Base::getModuleEntry() {
+	return nullptr;
+}
+
 std::optional<IMAGE_NT_HEADERS32> ProcessStructures32Base::getNtHeader() {
 	if(!m_vmm.getLoader().getProcessHandle()) {
 		return std::nullopt;
@@ -210,4 +214,14 @@ std::vector<ProcessStructures32Base::HeapBlock32> ProcessStructures32Base::getHe
 	}
 
 	return heapBlocks;
+}
+
+std::optional<MODULEINFO> ProcessStructures32Base::getModuleInformation() {
+	/*
+	HANDLE hProcess, HMODULE hModule, LPCSTR lpProcName,
+		MODULEINFO RemoteModuleInfo = { 0 };
+	GetModuleInformation(hProcess, hModule, &RemoteModuleInfo, sizeof(RemoteModuleInfo)))
+	return std::optional<MODULEINFO>();
+	*/
+	return std::nullopt;
 }

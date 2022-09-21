@@ -3,6 +3,7 @@
 #include <string>
 #include <Windows.h>
 #include "ntddk.h"
+#include <TlHelp32.h>
 
 typedef NTSTATUS(NTAPI* _NtQueryInformationProcess)(
 	IN HANDLE ProcessHandle,

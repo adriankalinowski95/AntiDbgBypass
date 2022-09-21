@@ -1,5 +1,4 @@
 #include "ProcessManagementUtils.h"
-#include <tlhelp32.h>
 #include "psapi.h"
 #include "ntddk.h"
 #include <sysinfoapi.h>
@@ -23,7 +22,7 @@ std::optional<std::uint32_t> ProcessManagementUtils::getProcessIDByName(std::str
 		if (exeFileName.compare(wProcessName) == 0) {
 			CloseHandle(snapshot);
 
-			return process.th32ProcessID;;
+			return process.th32ProcessID;
 		}
 
 		if (!Process32Next(snapshot, &process)) {

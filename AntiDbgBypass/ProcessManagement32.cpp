@@ -4,8 +4,8 @@
 #include "RemoteOps.h"
 #include <optional>
 
-ProcessManagement32::ProcessManagement32(VmmBase<std::uint32_t>& vmm, ProcessStructures32Base& processStructures):
-					ProcessManagement{ vmm },
+ProcessManagement32::ProcessManagement32(VmmBase<std::uint32_t>& vmm, LoaderBase& loaderBase, ProcessStructures32Base& processStructures):
+					ProcessManagement{ vmm, loaderBase },
 					m_processStructures{ processStructures } {}
 
 std::optional<std::uint32_t> ProcessManagement32::injectData(std::vector<std::uint8_t>& data) {

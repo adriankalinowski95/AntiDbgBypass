@@ -157,6 +157,7 @@
     <ClCompile Include="HeapManagement32.cpp" />
     <ClCompile Include="Hook32.cpp" />
     <ClCompile Include="hooklib.cpp" />
+    <ClCompile Include="Int3Bypass.cpp" />
     <ClCompile Include="LoaderUM.cpp" />
     <ClCompile Include="NtGlobalFlag32.cpp" />
     <ClCompile Include="NtQueryInformationProcess32.cpp" />
@@ -179,6 +180,10 @@
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
     <ClInclude Include="BaseBypass32.h" />
+    <ClInclude Include="Int3Bypass.h" />
+    <ClInclude Include="ModuleEntry32.h" />
+    <ClInclude Include="ModuleEntryAbstraction.h" />
+    <ClInclude Include="ModuleEntryBase.h" />
     <ClInclude Include="PEBAbstraction.h" />
     <ClInclude Include="BeingDebugged32.h" />
     <ClInclude Include="CheckRemoteDebuggerPresent32.h" />

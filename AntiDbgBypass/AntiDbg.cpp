@@ -6,6 +6,7 @@
 #include "CheckRemoteDebuggerPresent32.h"
 #include "NtQueryInformationProcess32.h"
 #include "Heap32.h"
+#include "Int3Bypass.h"
 
 #include <cstddef>
 
@@ -13,12 +14,14 @@ AntiDbg::AntiDbg(std::string processName):
 	m_processName{ processName },
 	m_loaderUM{ processName },
 	m_vmm32UM{ m_loaderUM },
-	m_processStructures32UM{ m_vmm32UM },
-	m_processStructures32Wow64UM{ m_vmm32UM },
-	m_processManagement32{ m_vmm32UM, m_processStructures32UM },
-	m_processManagement32Wow64{ m_vmm32UM, m_processStructures32Wow64UM }{}
+	m_processStructures32UM{ m_vmm32UM , m_loaderUM},
+	m_processStructures32Wow64UM{ m_vmm32UM, m_loaderUM },
+	m_processManagement32{ m_vmm32UM, m_loaderUM, m_processStructures32UM },
+	m_processManagement32Wow64{ m_vmm32UM,m_loaderUM, m_processStructures32Wow64UM }{}
 
 bool AntiDbg::bypassAll() {
+	auto int3Bypass = Int3Bypass(m_processManagement32).bypass();
+	/*
 	auto isNtGlobalFlag32Bypass = NtGlobalFlag32(m_processManagement32).bypass();
 	auto isNtGlobalFlag32Wow64Bypass = NtGlobalFlag32(m_processManagement32Wow64).bypass();
 	
@@ -34,9 +37,10 @@ bool AntiDbg::bypassAll() {
 
 	auto heap32Bypass = Heap32(m_processManagement32).bypass();
 	auto heap32Wow64Bypass = Heap32(m_processManagement32Wow64).bypass();
-
+	*/
 	return true;
 }
+
 
 
 

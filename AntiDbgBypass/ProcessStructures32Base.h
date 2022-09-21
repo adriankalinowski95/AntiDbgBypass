@@ -1,19 +1,23 @@
 #pragma once
 #include "VmmBase.h"
+#include "LoaderBase.h"
 #include <optional>
 #include "peb.h"
 #include "ntddk.h"
 #include <vector>
 #include "ntddk.h"
 #include "PEB32C.h"
+#include <Psapi.h>
+#include "ModuleEntryAbstraction.h"
 
 class ProcessStructures32Base {
 public:
 	using ImgLoadConfDir32_V = std::pair<std::uint32_t, IMAGE_LOAD_CONFIG_DIRECTORY32>;
 	using HeapBlock32 = std::pair<std::uint32_t, HEAP_UNPACKED_PACKET_32>;
 
-	ProcessStructures32Base(VmmBase<std::uint32_t>& vmm) : 
-		m_vmm{ vmm } {}
+	ProcessStructures32Base(VmmBase<std::uint32_t>& vmm, LoaderBase& loaderBase) : 
+		m_vmm{ vmm },
+		m_loaderBase{ loaderBase } {}
 	
 	std::optional<IMAGE_NT_HEADERS32> getNtHeader();
 	std::optional<PROCESS_BASIC_INFORMATION> getPBI();
@@ -23,7 +27,8 @@ public:
 	std::optional<FARPROC> getRemoteProcAddress(HMODULE hModule, LPCSTR lpProcName, UINT Ordinal, BOOL UseOrdinal);
 	std::vector<HEAP32> getHeaps();
 	std::vector<HeapBlock32> getHeapBlocks(HEAP32& heap);
-	
+	std::optional<MODULEINFO> getModuleInformation();
+
 	// Change to std::shared_ptr
 	// Main function who is getting PEB
 	PEBAbstraction* getPEB();
@@ -33,9 +38,12 @@ public:
 
 	// virtual abstraction, who is using a getPEBVa, used in getPEB
 	virtual PEBAbstraction* getPEBByVa(std::uint64_t va) = 0;
+	
+	virtual ModuleEntryAbstraction* getModuleEntry();
 
 protected:
 	VmmBase<std::uint32_t>& m_vmm;
+	LoaderBase& m_loaderBase;
 	// PEBAbstraction* basePEB;
 
 	static constexpr std::uint32_t Max_Heaps_Count = 128;

@@ -11,6 +11,11 @@ public:
 		if (handle){
 			setProcessHandle(*handle);
 		}
+
+		auto processId = ProcessManagementUtils::getProcessIDByName(processName);
+		if (processId){ 
+			setProcessId(*processId);
+		}
 	}
 
 	~LoaderUM() {

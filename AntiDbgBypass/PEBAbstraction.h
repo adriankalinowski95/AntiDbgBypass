@@ -18,4 +18,3 @@ public:
 	virtual size_t getProcessHeapsOffset() = 0;
 	virtual DWORD getNumberOfHeaps() = 0;
 };
-
