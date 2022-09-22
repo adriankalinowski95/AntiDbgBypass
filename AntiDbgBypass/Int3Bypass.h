@@ -19,6 +19,7 @@ private:
 	std::vector<std::uint32_t> getBreakPointsOverMemoryRange(std::uint32_t beginVa, std::uint32_t size);
 	std::vector<std::uint32_t> removeUnnecessaryBreakPoints(std::vector<std::uint32_t>& breakPoints);
 	std::vector<IndexRange> getCCTrains(std::vector<std::uint32_t>& breakPoints);
+	std::vector<IndexRange> removeAlignTrains(std::vector<std::uint32_t>& breakPoints, std::vector<IndexRange> trains);
 	std::optional<BreakPointType> analyzeBreakPoint(std::uint32_t va);
 	bool overrideBreakPoint(std::uint32_t va, BreakPointType breakPointType);
 };

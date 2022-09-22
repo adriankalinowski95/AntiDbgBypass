@@ -75,7 +75,6 @@ std::vector<std::uint32_t> Int3Bypass::getBreakPointsOverMemoryRange(std::uint32
 }
 
 std::vector<std::uint32_t> Int3Bypass::removeUnnecessaryBreakPoints(std::vector<std::uint32_t>& breakPoints) {
-	
 	return std::vector<std::uint32_t>();
 }
 
@@ -83,6 +82,7 @@ std::vector<Int3Bypass::IndexRange> Int3Bypass::getCCTrains(std::vector<std::uin
 	if(breakPoints.empty()) {
 		return std::vector<IndexRange>();
 	}
+
 	std::vector<IndexRange> ranges{};
 	std::uint32_t lastVa = breakPoints[0];
 	size_t beginIndex{};
@@ -107,6 +107,18 @@ std::vector<Int3Bypass::IndexRange> Int3Bypass::getCCTrains(std::vector<std::uin
 	}
 
 	return ranges;
+}
+
+std::vector<Int3Bypass::IndexRange> Int3Bypass::removeAlignTrains(std::vector<std::uint32_t>& breakPoints, std::vector<IndexRange> trains) {
+	if(breakPoints.empty() || trains.empty()) {
+		return std::vector<IndexRange>();
+	}
+
+	std::vector<IndexRange> ranges{};
+
+
+
+	return std::vector<IndexRange>();
 }
 
 std::optional<Int3Bypass::BreakPointType> Int3Bypass::analyzeBreakPoint(std::uint32_t va) {
