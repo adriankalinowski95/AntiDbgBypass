@@ -12,7 +12,7 @@ std::optional<std::uint64_t> ProcessStructures32UM::getPEBVa() {
 	return reinterpret_cast<std::uint32_t>( pbi->PebBaseAddress ) + ProcessManagementUtils::Page_Size;
 }
 
-PEBAbstraction* ProcessStructures32UM::getPEBByVa(std::uint64_t va) {
+IPEB* ProcessStructures32UM::getPEBByVa(std::uint64_t va) {
 	//PEB32C peb32{,va }
 	PEB32 peb32{};
 	if(!m_vmm.getVar(peb32, va)) {
@@ -23,7 +23,7 @@ PEBAbstraction* ProcessStructures32UM::getPEBByVa(std::uint64_t va) {
 	//return std::make_shared<PEB32C>(peb32, va).get();
 }
 
-ModuleEntryAbstraction* ProcessStructures32UM::getModuleEntry() {
+IModuleEntry* ProcessStructures32UM::getModuleEntry() {
 	if(!m_loaderBase.getProcessHandle()) {
 		return nullptr;
 	}

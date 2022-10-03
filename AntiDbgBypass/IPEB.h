@@ -4,7 +4,7 @@
 #include <cstddef>
 #include "peb.h"
 
-class PEBAbstraction {
+class IPEB {
 public:
 	virtual size_t getSize() = 0;
 	virtual std::uint64_t getVa() = 0;

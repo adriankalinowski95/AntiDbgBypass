@@ -23,7 +23,7 @@ bool ProcessHeapFlags32::bypass() {
 	return true;
 } 
 
-bool ProcessHeapFlags32::isFlagsOn32(PEBAbstraction* peb) {
+bool ProcessHeapFlags32::isFlagsOn32(IPEB* peb) {
 	if(!peb) {
 		return false;
 	}
@@ -39,7 +39,7 @@ bool ProcessHeapFlags32::isFlagsOn32(PEBAbstraction* peb) {
 	return heapFlagValue & ~HEAP_GROWABLE;
 }
 
-bool ProcessHeapFlags32::isForceFlagsOn32(PEBAbstraction* peb) {
+bool ProcessHeapFlags32::isForceFlagsOn32(IPEB* peb) {
 	if(!peb) {
 		return false;
 	}
@@ -55,7 +55,7 @@ bool ProcessHeapFlags32::isForceFlagsOn32(PEBAbstraction* peb) {
 	return heapForceFlagValue  != 0;
 }
 
-bool ProcessHeapFlags32::bypassFlags32(PEBAbstraction* peb) {
+bool ProcessHeapFlags32::bypassFlags32(IPEB* peb) {
 	if(!peb) {
 		return false;
 	}
@@ -67,7 +67,7 @@ bool ProcessHeapFlags32::bypassFlags32(PEBAbstraction* peb) {
 	return m_processManagement.getVmm().putVar(heapFlagValue, heapFlagVa);
 }
 
-bool ProcessHeapFlags32::bypassForceFlags32(PEBAbstraction* peb) {
+bool ProcessHeapFlags32::bypassForceFlags32(IPEB* peb) {
 	if(!peb) {
 		return false;
 	}

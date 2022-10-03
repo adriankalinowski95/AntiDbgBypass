@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <wtypes.h>
 
-class ModuleEntryAbstraction {
+class IModuleEntry {
 public:
 	virtual std::uint64_t getDwSize() = 0;
 	virtual std::uint64_t getModuleId() = 0;

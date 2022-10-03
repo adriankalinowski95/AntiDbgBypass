@@ -11,6 +11,8 @@ bool Int3Bypass::bypass() {
 	auto trains = getCCTrains(breakPoints);
 	// We need to remove unnecessary trains
 
+	trains = removeAlignTrains(breakPoints, trains);
+
 	for(auto& breakPoint : breakPoints) {
 		const auto breakPointType = analyzeBreakPoint(breakPoint);
 		if(!breakPointType) {
@@ -115,10 +117,27 @@ std::vector<Int3Bypass::IndexRange> Int3Bypass::removeAlignTrains(std::vector<st
 	}
 
 	std::vector<IndexRange> ranges{};
+	for(auto train : trains) {
+		auto lastBreakPoint = breakPoints[train.first];
+		std::uint8_t lastByte{};
+		if (!this->m_processManagement.getVmm().getVar(lastByte, lastBreakPoint - 0x1)) {
+				continue;
+		}
+
+		if (lastByte == 0xC3) {
+			continue;
+		}
+
+		auto trainSize = (int)(train.second - train.first) + 1;
+		if (trainSize >= sizeof(std::uint32_t)) {
+			continue;
+		}
+
+		ranges.push_back(train);
+	}
 
 
-
-	return std::vector<IndexRange>();
+	return ranges;
 }
 
 std::optional<Int3Bypass::BreakPointType> Int3Bypass::analyzeBreakPoint(std::uint32_t va) {

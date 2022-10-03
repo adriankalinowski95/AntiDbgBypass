@@ -1,5 +1,7 @@
 #pragma once
+
 #include "PEBBase.h"
+#include "peb.h"
 
 class PEB64C : public PEBBase<PEB64> {
 public:

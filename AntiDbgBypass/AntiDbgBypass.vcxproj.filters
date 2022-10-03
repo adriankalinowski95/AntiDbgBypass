@@ -233,9 +233,6 @@
     <ClInclude Include="PEB32C.h">
       <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
-    <ClInclude Include="PEBAbstraction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PEBBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -245,10 +242,13 @@
     <ClInclude Include="ModuleEntry32.h">
       <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleEntryAbstraction.h">
+    <ClInclude Include="IModuleEntry.h">
       <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
     <ClInclude Include="ModuleEntryBase.h">
+      <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="IPEB.h">
       <Filter>Header Files\process_strucutres</Filter>
     </ClInclude>
   </ItemGroup>

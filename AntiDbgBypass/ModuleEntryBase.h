@@ -1,8 +1,9 @@
 #pragma once
-#include "ModuleEntryAbstraction.h"
+
+#include "IModuleEntry.h"
 
 template <class T>
-class ModuleEntryBase : public ModuleEntryAbstraction {
+class ModuleEntryBase : public IModuleEntry {
 public:
 	ModuleEntryBase(T moduleEntry, std::uint64_t va):
 		m_moduleEntry{ moduleEntry },

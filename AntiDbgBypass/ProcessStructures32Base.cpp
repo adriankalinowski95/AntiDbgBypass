@@ -3,7 +3,7 @@
 #include "RemoteOps.h"
 #include <minwindef.h>
 
-PEBAbstraction* ProcessStructures32Base::getPEB() {
+IPEB* ProcessStructures32Base::getPEB() {
 	const auto pebVa = getPEBVa();
 	if(!pebVa) {
 		return nullptr;
@@ -12,7 +12,7 @@ PEBAbstraction* ProcessStructures32Base::getPEB() {
 	return getPEBByVa(*pebVa);
 }
 
-ModuleEntryAbstraction* ProcessStructures32Base::getModuleEntry() {
+IModuleEntry* ProcessStructures32Base::getModuleEntry() {
 	return nullptr;
 }
 

@@ -2,10 +2,10 @@
 #include <windows.h>
 #include <cstdint>
 #include <cstddef>
-#include "PEBAbstraction.h"
+#include "IPEB.h"
 
 template <class T>
-class PEBBase : public PEBAbstraction {
+class PEBBase : public IPEB {
 public:
 	PEBBase(T peb, std::uint64_t va):
 		m_peb{ peb },

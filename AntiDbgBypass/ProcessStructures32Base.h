@@ -8,7 +8,7 @@
 #include "ntddk.h"
 #include "PEB32C.h"
 #include <Psapi.h>
-#include "ModuleEntryAbstraction.h"
+#include "IModuleEntry.h"
 
 class ProcessStructures32Base {
 public:
@@ -31,20 +31,19 @@ public:
 
 	// Change to std::shared_ptr
 	// Main function who is getting PEB
-	PEBAbstraction* getPEB();
+	IPEB* getPEB();
 	
 	// We have 2 options to get PEB - from TEB and TBI.
 	virtual std::optional<std::uint64_t> getPEBVa() = 0;
 
 	// virtual abstraction, who is using a getPEBVa, used in getPEB
-	virtual PEBAbstraction* getPEBByVa(std::uint64_t va) = 0;
-	
-	virtual ModuleEntryAbstraction* getModuleEntry();
+	virtual IPEB* getPEBByVa(std::uint64_t va) = 0;
+	 
+	virtual IModuleEntry* getModuleEntry();
 
 protected:
 	VmmBase<std::uint32_t>& m_vmm;
 	LoaderBase& m_loaderBase;
-	// PEBAbstraction* basePEB;
 
 	static constexpr std::uint32_t Max_Heaps_Count = 128;
 	static constexpr std::uint32_t Max_Heap_Blocks_Count = 128;
