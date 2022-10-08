@@ -128,14 +128,13 @@ std::vector<Int3Bypass::IndexRange> Int3Bypass::removeAlignTrains(std::vector<st
 			continue;
 		}
 
-		auto trainSize = (int)(train.second - train.first) + 1;
+		auto trainSize = static_cast<int>(train.second - train.first) + 1;
 		if (trainSize >= sizeof(std::uint32_t)) {
 			continue;
 		}
 
 		ranges.push_back(train);
 	}
-
 
 	return ranges;
 }
