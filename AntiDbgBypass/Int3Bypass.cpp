@@ -1,4 +1,5 @@
 #include "Int3Bypass.h"
+#include "BreakPointOverride.h"
 #include <array>
 #include <numeric>
 
@@ -13,14 +14,13 @@ bool Int3Bypass::bypass() {
 
 	trains = removeAlignTrains(breakPoints, trains);
 
-	for(auto& breakPoint : breakPoints) {
-		const auto breakPointType = analyzeBreakPoint(breakPoint);
-		if(!breakPointType) {
-			continue;
-		}
-
-		overrideBreakPoint(breakPoint, *breakPointType);
+	auto currentBreakPoints = convertTrainToBreakPoints(breakPoints, trains);
+	BreakPointOverride bpOverride(m_processManagement);
+	
+	for(auto& breakPoint : currentBreakPoints) {
+		bpOverride.overrideByRaisException(breakPoint);
 	}
+	
 
 	return false;
 }
@@ -74,10 +74,6 @@ std::vector<std::uint32_t> Int3Bypass::getBreakPointsOverMemoryRange(std::uint32
 	}
 
 	return breakPoints;
-}
-
-std::vector<std::uint32_t> Int3Bypass::removeUnnecessaryBreakPoints(std::vector<std::uint32_t>& breakPoints) {
-	return std::vector<std::uint32_t>();
 }
 
 std::vector<Int3Bypass::IndexRange> Int3Bypass::getCCTrains(std::vector<std::uint32_t>& breakPoints) {
@@ -139,10 +135,7 @@ std::vector<Int3Bypass::IndexRange> Int3Bypass::removeAlignTrains(std::vector<st
 	return ranges;
 }
 
-std::optional<Int3Bypass::BreakPointType> Int3Bypass::analyzeBreakPoint(std::uint32_t va) {
-	return std::optional<BreakPointType>();
-}
-
-bool Int3Bypass::overrideBreakPoint(std::uint32_t va, BreakPointType breakPointType) {
-	return false;
+std::vector<std::uint32_t> Int3Bypass::convertTrainToBreakPoints(std::vector<std::uint32_t>& breakPoints, std::vector<IndexRange>& trains)
+{
+	return std::vector<std::uint32_t>();
 }

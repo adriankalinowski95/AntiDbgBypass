@@ -33,6 +33,16 @@ public:
 		return m_moduleEntry.hModule;
 	}
 
+	std::optional<std::pair<std::uint64_t, std::uint64_t>> getCodeRange() {
+		auto rangeStart = m_moduleEntry.modBaseAddr;
+		auto rangeEnd = m_moduleEntry.modBaseAddr + m_moduleEntry.modBaseSize;
+		if (rangeStart == rangeEnd || rangeStart > rangeEnd) {
+			return std::nullopt;
+		}
+
+		return std::make_pair(rangeStart, rangeEnd);
+	}
+
 protected:
 	T m_moduleEntry;
 	std::uint64_t m_va;

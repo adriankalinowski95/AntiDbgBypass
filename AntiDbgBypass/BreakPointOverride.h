@@ -10,4 +10,3 @@ public:
 private:
 	ProcessManagement32& m_processManagement;
 };
-
