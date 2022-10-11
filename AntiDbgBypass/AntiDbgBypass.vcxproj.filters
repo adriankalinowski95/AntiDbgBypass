@@ -132,6 +132,12 @@
     <ClCompile Include="Int3Bypass.cpp">
       <Filter>Source Files\bypass</Filter>
     </ClCompile>
+    <ClCompile Include="BreakPointOverride.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionCaller32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntiDbg.h">
@@ -250,6 +256,18 @@
     </ClInclude>
     <ClInclude Include="IPEB.h">
       <Filter>Header Files\process_strucutres</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakPointOverride.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFunctionCaller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionCaller32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionCallerBuilder.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

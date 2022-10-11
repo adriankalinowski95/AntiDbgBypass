@@ -28,3 +28,19 @@ bool BreakPointOverride::overrideByNop(std::uint32_t va)
 	
 	return m_processManagement.getVmm().putVar(nop, va);
 }
+
+std::optional<std::uint32_t> BreakPointOverride::getRaiseExceptionVa()
+{
+	return std::optional<std::uint32_t>();
+}
+
+std::vector<std::uint8_t> BreakPointOverride::getRaiseExceptionTrampoline(std::uint32_t raiseExceptionVa, std::uint32_t bpVa)
+{
+	return std::vector<std::uint8_t>();
+}
+
+bool BreakPointOverride::overrideUsingTrampoline(std::vector<std::uint8_t>& trapomline)
+{
+	return false;
+}
+

@@ -151,7 +151,9 @@
     <ClCompile Include="BaseBypass32.cpp" />
     <ClCompile Include="BasePEB.cpp" />
     <ClCompile Include="BeingDebugged32.cpp" />
+    <ClCompile Include="BreakPointOverride.cpp" />
     <ClCompile Include="CheckRemoteDebuggerPresent32.cpp" />
+    <ClCompile Include="FunctionCaller32.cpp" />
     <ClCompile Include="GlobalFlagsClear32.cpp" />
     <ClCompile Include="Heap32.cpp" />
     <ClCompile Include="HeapManagement32.cpp" />
@@ -180,6 +182,10 @@
   <ItemGroup>
     <ClInclude Include="AntiDbg.h" />
     <ClInclude Include="BaseBypass32.h" />
+    <ClInclude Include="BreakPointOverride.h" />
+    <ClInclude Include="FunctionCaller32.h" />
+    <ClInclude Include="FunctionCallerBuilder.h" />
+    <ClInclude Include="IFunctionCaller.h" />
     <ClInclude Include="Int3Bypass.h" />
     <ClInclude Include="ModuleEntry32.h" />
     <ClInclude Include="IModuleEntry.h" />
