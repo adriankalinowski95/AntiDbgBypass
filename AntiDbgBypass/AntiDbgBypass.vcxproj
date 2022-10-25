@@ -185,6 +185,7 @@
     <ClInclude Include="BreakPointOverride.h" />
     <ClInclude Include="FunctionCaller32.h" />
     <ClInclude Include="FunctionCallerBuilder.h" />
+    <ClInclude Include="FunctionCallerBuilder32.h" />
     <ClInclude Include="IFunctionCaller.h" />
     <ClInclude Include="Int3Bypass.h" />
     <ClInclude Include="ModuleEntry32.h" />

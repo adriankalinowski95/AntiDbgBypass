@@ -34,8 +34,8 @@ public:
 	}
 
 	std::optional<std::pair<std::uint64_t, std::uint64_t>> getCodeRange() {
-		auto rangeStart = m_moduleEntry.modBaseAddr;
-		auto rangeEnd = m_moduleEntry.modBaseAddr + m_moduleEntry.modBaseSize;
+		auto rangeStart = (std::uint64_t)(m_moduleEntry.modBaseAddr);
+		auto rangeEnd = (std::uint64_t)(m_moduleEntry.modBaseAddr) + (std::uint64_t)m_moduleEntry.modBaseSize;
 		if (rangeStart == rangeEnd || rangeStart > rangeEnd) {
 			return std::nullopt;
 		}

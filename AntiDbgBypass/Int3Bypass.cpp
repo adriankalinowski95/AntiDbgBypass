@@ -2,6 +2,7 @@
 #include "BreakPointOverride.h"
 #include <array>
 #include <numeric>
+#include "FunctionCaller32.h"
 
 bool Int3Bypass::bypass() {
 	auto breakPoints = getBreakPointsLocations();
@@ -15,8 +16,7 @@ bool Int3Bypass::bypass() {
 	trains = removeAlignTrains(breakPoints, trains);
 
 	auto currentBreakPoints = convertTrainToBreakPoints(breakPoints, trains);
-	BreakPointOverride bpOverride(m_processManagement);
-	
+	BreakPointOverride bpOverride(m_processManagement);	
 	for(auto& breakPoint : currentBreakPoints) {
 		bpOverride.overrideByRaisException(breakPoint);
 	}
